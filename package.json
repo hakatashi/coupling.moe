@@ -59,7 +59,7 @@
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^3.0.0",
     "mocha": "^5.2.0",
-    "nightwatch": "^0.9.21",
+    "nightwatch": "^1.0.6",
     "opn": "^5.3.0",
     "optimize-css-assets-webpack-plugin": "^4.0.2",
     "ora": "^2.1.0",
