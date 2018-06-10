@@ -8,6 +8,7 @@ const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base.conf')
 
 const webpackConfig = merge(baseConfig, {
+  mode: 'development',
   // use inline sourcemap for karma-sourcemap-loader
   module: {
     rules: utils.styleLoaders()
