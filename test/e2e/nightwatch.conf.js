@@ -10,6 +10,7 @@ module.exports = {
 	selenium: {
 		start_process: true,
 		server_path: require('selenium-server').path,
+		log_path: process.cwd(),
 		host: '127.0.0.1',
 		port: 4444,
 		cli_args: {
