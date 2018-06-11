@@ -1,29 +1,34 @@
 module.exports = {
-  /*
+
+	/*
   ** Build configuration
   */
-  build: {},
-  /*
+	build: {},
+
+	/*
   ** Headers
   ** Common headers are already provided by @nuxtjs/pwa preset
   */
-  head: {},
-  /*
+	head: {},
+
+	/*
   ** Customize the progress-bar color
   */
-  loading: { color: '#3B8070' },
-  /*
+	loading: {color: '#3B8070'},
+
+	/*
   ** Customize app manifest
   */
-  manifest: {
+	manifest: {
 		name: 'カップリングDB',
 		short_name: 'カップリングDB',
-    theme_color: '#3B8070',
-  },
-  /*
+		theme_color: '#3B8070',
+	},
+
+	/*
   ** Modules
   */
-  modules: [
-    '@nuxtjs/pwa',
-  ]
-}
+	modules: [
+		'@nuxtjs/pwa',
+	],
+};

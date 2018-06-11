@@ -1,16 +1,24 @@
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
+	parserOptions: {
+	  parser: 'babel-eslint',
+	},
   env: {
     browser: true,
     node: true
   },
-  extends: 'standard',
+  extends: [
+		'@hakatashi',
+		'plugin:vue/recommended',
+	],
   // required to lint *.vue files
   plugins: [
-    'html'
+    'vue',
   ],
   // add your custom rules here
-  rules: {},
+  rules: {
+		'vue/html-indent': ['error', 'tab'],
+    'node/no-unsupported-features': 'off',
+	},
   globals: {}
 }
