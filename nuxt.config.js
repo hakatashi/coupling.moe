@@ -16,12 +16,14 @@ module.exports = {
   ** Customize app manifest
   */
   manifest: {
-    theme_color: '#3B8070'
+		name: 'カップリングDB',
+		short_name: 'カップリングDB',
+    theme_color: '#3B8070',
   },
   /*
   ** Modules
   */
   modules: [
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
   ]
 }
