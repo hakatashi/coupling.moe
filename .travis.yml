@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - node
+dist: trusty
+sudo: false
+script:
+  - npm run generate -- --spa
+branches:
+  except:
+    - "/^v\\d+\\.\\d+\\.\\d+$/"
+    - gh-pages
+notifications:
+  webhooks: http://webhook.hakatashi.com/travis
+deploy:
+  provider: firebase
+  token:
+    secure: LSS6x67O6IaVofB7Qy9r41/eUQgSBNOPTXQ/okWFK6JsUXifJmX3HnXTvaeiIvcNAriZfJAs5htU8JnRHgj3HS8/NHn1QlzRnlyJ1yhRIQtoQJgIwdemWX78r/VlTNrNdKK7mRcyuzZNVkoI0wXnlwN9nY0AOm+3/q7vloWQyNkD6cRWr3TYEouJTzIE/eDU2gaTPQ+gubl9q6d5r39T+hX5VB9l2gOx3KVc3EjOvKMxItanXKlmdMYw2Wjogw1QG3RyQB2BdEwiHkq0enR4kRJpcGrceRg0afk1006yFocl0PPfAVOgU7CIJp+ALqnhCjTFq/JpvtCgSWtTHqVSb97H9QIyT0IoMxdx/qBURGc25YFBHpzR8dlLgJ0oKS91iS+lwdpspVxNea9CIVUZM+c0J0kqhIgYyaBMA4a21y91qlNlL/hK8utP8wAlojTY90G8wi5zwVgqsigr8luctVIIzvbRbgjG3MCetqMr15QfcjlfF8KwEYkTogNJKEBK46zsuJzWxu/5m+/DHmpf4QWJszJ/vk2THLOUi4FoFIdAhmJ9KJjTL8OZ8GHmxs5cfZviv03WPlZmqINYBWQ7NE4/eGKeAG2StZBrIzFLF+cHQq/7FEbFJRps5C5174OAntvckIy2aDbxFb7i4Wlg1GGmiuScRBX7FKtAhhvqCt4=
