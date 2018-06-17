@@ -1,6 +1,8 @@
 import {firebaseAction, firebaseMutations} from 'vuexfire';
 import Vuex from 'vuex';
+import VuexPersistence from 'vuex-persist';
 import firebase from 'firebase';
+import localforage from 'localforage';
 
 if (firebase.apps.length === 0) {
 	firebase.initializeApp({
@@ -12,6 +14,10 @@ const firebaseApp = firebase.apps[0];
 
 const db = firebaseApp.database();
 const counterRef = db.ref('counter');
+
+const vuexLocal = new VuexPersistence({
+	storage: localforage,
+});
 
 const store = () => new Vuex.Store({
 	state: {
@@ -33,6 +39,7 @@ const store = () => new Vuex.Store({
 			}
 		}),
 	},
+	plugins: [vuexLocal.plugin],
 });
 
 export default store;

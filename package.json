@@ -23,6 +23,8 @@
     "eslint-loader": "^2.0.0",
     "eslint-plugin-vue": "^4.5.0",
     "firebase": "^5.0.4",
+    "localforage": "^1.7.2",
+    "vuex-persist": "^1.4.0",
     "vuexfire": "^2.3.0"
   }
 }
