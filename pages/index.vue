@@ -8,7 +8,14 @@
 			<h2 class="subtitle">
 				PWA Vue.js Application
 			</h2>
-			<button type="button" @click="handleClickButton" class="button--green counter">{{counter}}</button>
+			<button
+				type="button"
+				@click="handleClickButton"
+				class="button--green counter"
+				:disabled="!online"
+			>
+				{{counter}}
+			</button>
 			<div :class="['network', online ? 'online' : 'offline']">
 				<div class="circle"/>
 				{{online ? 'online' : 'offline'}}
@@ -48,20 +55,26 @@ export default {
 			this.online = false;
 			return;
 		}
+
 		this.online = Boolean(window.navigator.onLine);
 		this.$store.dispatch('init');
-		window.addEventListener('offline', this._toggleNetworkStatus);
-		window.addEventListener('online', this._toggleNetworkStatus);
+
+		window.addEventListener('offline', this.handleNetworkChange);
+		window.addEventListener('online', this.handleNetworkChange);
 	},
 	destroyed() {
-		window.removeEventListener('offline', this._toggleNetworkStatus);
-		window.removeEventListener('online', this._toggleNetworkStatus);
+		window.removeEventListener('offline', this.handleNetworkChange);
+		window.removeEventListener('online', this.handleNetworkChange);
 	},
 	methods: {
-		_toggleNetworkStatus({type}) {
+		handleNetworkChange({type}) {
 			this.online = type === 'online';
 		},
 		handleClickButton() {
+			if (!this.online) {
+				return;
+			}
+
 			this.$store.dispatch('increment');
 		},
 	},

@@ -1,6 +1,6 @@
 import {firebaseAction, firebaseMutations} from 'vuexfire';
 import Vuex from 'vuex';
-import VuexPersistence from 'vuex-persist';
+import VuexPersist from 'vuex-persist';
 import firebase from 'firebase';
 import localforage from 'localforage';
 
@@ -15,7 +15,7 @@ const firebaseApp = firebase.apps[0];
 const db = firebaseApp.database();
 const counterRef = db.ref('counter');
 
-const vuexLocal = new VuexPersistence({
+const vuexLocal = new VuexPersist({
 	storage: localforage,
 });
 

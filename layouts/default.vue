@@ -31,7 +31,12 @@ html {
 	text-decoration: none;
 	padding: 10px 30px;
 }
-.button--green:hover {
+.button--green[disabled] {
+	color: dimgray;
+	border-color: dimgray;
+	background-color: lightgray;
+}
+.button--green:not([disabled]):hover {
 	color: #fff;
 	background-color: #3b8070;
 }
