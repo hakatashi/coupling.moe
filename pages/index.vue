@@ -8,7 +8,7 @@
 			<h2 class="subtitle">
 				PWA Vue.js Application
 			</h2>
-			<button type="button" @click="handleClickButton" class="button--green">{{$store.state.counter}}</button>
+			<button type="button" @click="handleClickButton" class="button--green counter">{{counter}}</button>
 			<div :class="['network', online ? 'online' : 'offline']">
 				<div class="circle"/>
 				{{online ? 'online' : 'offline'}}
@@ -31,6 +31,7 @@
 
 <script>
 import Logo from '~/components/Logo.vue';
+import {mapGetters} from 'vuex';
 
 export default {
 	components: {Logo},
@@ -39,12 +40,16 @@ export default {
 			online: true,
 		};
 	},
+	computed: {
+		...mapGetters(['counter']),
+	},
 	mounted() {
 		if (!window.navigator) {
 			this.online = false;
 			return;
 		}
 		this.online = Boolean(window.navigator.onLine);
+		this.$store.dispatch('init');
 		window.addEventListener('offline', this._toggleNetworkStatus);
 		window.addEventListener('online', this._toggleNetworkStatus);
 	},
@@ -57,7 +62,7 @@ export default {
 			this.online = type === 'online';
 		},
 		handleClickButton() {
-			this.$store.commit('increment');
+			this.$store.dispatch('increment');
 		},
 	},
 };
@@ -91,6 +96,10 @@ export default {
 
 .links {
 	padding-top: 15px;
+}
+
+.counter {
+	margin-bottom: 10px;
 }
 
 .network {
