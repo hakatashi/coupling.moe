@@ -1,18 +1,10 @@
 import {firebaseAction, firebaseMutations} from 'vuexfire';
 import Vuex from 'vuex';
 import VuexPersist from 'vuex-persist';
-import firebase from 'firebase';
+import firebase from '~/lib/firebase.js';
 import localforage from 'localforage';
 
-if (firebase.apps.length === 0) {
-	firebase.initializeApp({
-		databaseURL: 'https://coupling-moe.firebaseio.com/',
-	});
-}
-
-const firebaseApp = firebase.apps[0];
-
-const db = firebaseApp.database();
+const db = firebase.database();
 const counterRef = db.ref('counter');
 
 const vuexLocal = new VuexPersist({
