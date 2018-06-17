@@ -8,9 +8,10 @@
 			<h2 class="subtitle">
 				PWA Vue.js Application
 			</h2>
+			<button type="button" @click="handleClickButton" class="button--green">{{$store.state.counter}}</button>
 			<div :class="['network', online ? 'online' : 'offline']">
 				<div class="circle"/>
-				{{ online ? 'online' : 'offline' }}
+				{{online ? 'online' : 'offline'}}
 			</div>
 			<div class="links">
 				<a
@@ -54,6 +55,9 @@ export default {
 	methods: {
 		_toggleNetworkStatus({type}) {
 			this.online = type === 'online';
+		},
+		handleClickButton() {
+			this.$store.commit('increment');
 		},
 	},
 };
