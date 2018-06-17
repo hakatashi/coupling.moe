@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "counter": {
+      ".read": true,
+      ".write": true,
+      ".validate": "newData.isNumber() && newData.val() - data.val() === 1"
+    }
+  }
+}
