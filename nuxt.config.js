@@ -34,4 +34,10 @@ module.exports = {
 	env: {
 		VAPID_KEY: 'BNwKlUsy_JXMtIFPCH2PCcZ213I6QZJt27ZwiqhKzNf-f0XeYQDdfGE165x3M49fEaMAH-B9Z0oQhK4gCI_R68o',
 	},
+
+	workbox: {
+		importScripts: [
+			'firebase-messaging-sw.js',
+		],
+	},
 };
