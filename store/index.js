@@ -27,7 +27,7 @@ const store = () => new Vuex.Store({
 		}),
 		increment: firebaseAction((context) => {
 			if (context.getters.counter !== null) {
-				counterRef.set(context.getters.counter + 1);
+				counterRef.transaction((counter) => counter + 1);
 			}
 		}),
 	},
