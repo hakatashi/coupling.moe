@@ -54,20 +54,14 @@ export default {
 	created() {
 		this.db = firebase.database();
 		this.enableNotification = async () => {
-			if (!process.browser) {
-				return;
+			if (process.browser) {
+				const {user} = await firebase.auth().signInAnonymously();
+				const messaging = firebase.messaging();
+				messaging.usePublicVapidKey(process.env.VAPID_KEY);
+				await messaging.requestPermission();
+				const token = await messaging.getToken();
+				await this.db.ref(`users/${user.uid}/notificationToken`).set(token);
 			}
-
-			const serviceWorkerRegistrations = await navigator.serviceWorker.getRegistrations();
-			const {user} = await firebase.auth().signInAnonymously();
-			const messaging = firebase.messaging();
-			if (serviceWorkerRegistrations.length > 0) {
-				messaging.useServiceWorker(serviceWorkerRegistrations[0]);
-			}
-			messaging.usePublicVapidKey(process.env.VAPID_KEY);
-			await messaging.requestPermission();
-			const token = await messaging.getToken();
-			await this.db.ref(`users/${user.uid}/notificationToken`).set(token);
 		};
 	},
 	mounted() {
