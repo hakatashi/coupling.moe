@@ -4,6 +4,14 @@
       ".read": true,
       ".write": true,
       ".validate": "newData.isNumber() && newData.val() - data.val() === 1"
+    },
+    "users": {
+      "$uid": {
+        ".write": "$uid === auth.uid",
+        "notificationToken": {
+          ".validate": "newData.isString()"
+        }
+      }
     }
   }
 }

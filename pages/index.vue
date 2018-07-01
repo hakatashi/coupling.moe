@@ -39,6 +39,7 @@
 <script>
 import Logo from '~/components/Logo.vue';
 import {mapGetters} from 'vuex';
+import firebase from '~/lib/firebase.js';
 
 export default {
 	components: {Logo},
@@ -50,6 +51,19 @@ export default {
 	computed: {
 		...mapGetters(['counter']),
 	},
+	created() {
+		this.db = firebase.database();
+		this.enableNotification = async () => {
+			if (process.browser) {
+				const {user} = await firebase.auth().signInAnonymously();
+				const messaging = firebase.messaging();
+				messaging.usePublicVapidKey(process.env.VAPID_KEY);
+				await messaging.requestPermission();
+				const token = await messaging.getToken();
+				await this.db.ref(`users/${user.uid}/notificationToken`).set(token);
+			}
+		};
+	},
 	mounted() {
 		if (!window.navigator) {
 			this.online = false;
@@ -58,6 +72,7 @@ export default {
 
 		this.online = Boolean(window.navigator.onLine);
 		this.$store.dispatch('init');
+		this.enableNotification();
 
 		window.addEventListener('offline', this.handleNetworkChange);
 		window.addEventListener('online', this.handleNetworkChange);
