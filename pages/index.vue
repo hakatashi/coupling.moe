@@ -14,7 +14,7 @@
 				class="button--green counter"
 				:disabled="!online"
 			>
-				100
+				{{counter}}
 			</button>
 			<div :class="['network', online ? 'online' : 'offline']">
 				<div class="circle"/>
@@ -50,27 +50,10 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters([]),
+		...mapGetters(['counter']),
 	},
 	created() {
 		this.usersRef = db.collection('users');
-		this.enableNotification = async () => {
-			if (process.browser) {
-				const {user} = await firebase.auth().signInAnonymously();
-
-				this.messaging = firebase.messaging();
-				this.messaging.usePublicVapidKey(process.env.VAPID_KEY);
-				await this.messaging.requestPermission();
-				const token = await this.messaging.getToken();
-				await this.usersRef.doc(user.uid).set({
-					notificationToken: token,
-				});
-
-				this.messaging.onMessage((payload) => {
-					console.log('onMessage:', payload);
-				})
-			}
-		};
 	},
 	mounted() {
 		if (!window.navigator) {
@@ -79,6 +62,7 @@ export default {
 		}
 
 		this.online = Boolean(window.navigator.onLine);
+		this.$store.dispatch('init');
 		this.enableNotification();
 
 		window.addEventListener('offline', this.handleNetworkChange);
@@ -98,6 +82,23 @@ export default {
 			}
 
 			this.$store.dispatch('increment');
+		},
+		async enableNotification() {
+			if (process.browser) {
+				const {user} = await firebase.auth().signInAnonymously();
+
+				this.messaging = firebase.messaging();
+				this.messaging.usePublicVapidKey(process.env.VAPID_KEY);
+				await this.messaging.requestPermission();
+				const token = await this.messaging.getToken();
+				await this.usersRef.doc(user.uid).set({
+					notificationToken: token,
+				});
+
+				this.messaging.onMessage((payload) => {
+					console.log('onMessage:', payload);
+				})
+			}
 		},
 	},
 };

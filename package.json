@@ -25,6 +25,6 @@
     "firebase": "^5.0.4",
     "localforage": "^1.7.2",
     "vuex-persist": "^1.4.0",
-    "vuexfire": "^2.3.0"
+    "vuexfire": "^3.0.0-alpha.5"
   }
 }
