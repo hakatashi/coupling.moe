@@ -1,37 +1,11 @@
 import {firebaseAction, firebaseMutations} from 'vuexfire';
 import Vuex from 'vuex';
-import VuexPersist from 'vuex-persist';
-import firebase from '~/lib/firebase.js';
-import localforage from 'localforage';
-
-const db = firebase.database();
-const counterRef = db.ref('counter');
-
-const vuexLocal = new VuexPersist({
-	storage: localforage,
-});
+import db from '~/lib/db.js';
 
 const store = () => new Vuex.Store({
 	state: {
-		counter: {
-			'.value': null,
-		},
+		hoge: null,
 	},
-	mutations: firebaseMutations,
-	getters: {
-		counter: (state) => state.counter['.value'],
-	},
-	actions: {
-		init: firebaseAction(({bindFirebaseRef}) => {
-			bindFirebaseRef('counter', counterRef);
-		}),
-		increment: firebaseAction((context) => {
-			if (context.getters.counter !== null) {
-				counterRef.transaction((counter) => counter + 1);
-			}
-		}),
-	},
-	plugins: [vuexLocal.plugin],
 });
 
 export default store;
