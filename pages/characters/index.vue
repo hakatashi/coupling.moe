@@ -1,6 +1,6 @@
 <template>
 	<v-list>
-		<v-list-tile ripple v-for="character in characters">
+		<v-list-tile v-for="character in characters" :key="character.id" nuxt :to="`/characters/${character.name}`">
 			<v-list-tile-content>
 				<v-list-tile-title>
 					{{character.name}}
