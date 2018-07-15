@@ -6,7 +6,7 @@ import db from '~/lib/db.js';
 const charactersRef = db.collection('characters');
 
 export const state = () => ({
-	list: null,
+	list: [],
 });
 
 export const mutations = firebaseMutations;

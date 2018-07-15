@@ -5,8 +5,8 @@
   "author": "Koki Takahashi <hakatasiloving@gmail.com>",
   "private": true,
   "dependencies": {
-    "nuxt": "latest",
-    "@nuxtjs/pwa": "latest"
+    "@nuxtjs/pwa": "latest",
+    "nuxt": "latest"
   },
   "scripts": {
     "dev": "nuxt",
@@ -25,6 +25,7 @@
     "firebase": "^5.2.0",
     "localforage": "^1.7.2",
     "vuex-persist": "^1.4.3",
-    "vuexfire": "^3.0.0-alpha.5"
+    "vuexfire": "^3.0.0-alpha.5",
+    "vuetify": "^1.1.4"
   }
 }

@@ -34,4 +34,12 @@ module.exports = {
 	env: {
 		VAPID_KEY: 'BNwKlUsy_JXMtIFPCH2PCcZ213I6QZJt27ZwiqhKzNf-f0XeYQDdfGE165x3M49fEaMAH-B9Z0oQhK4gCI_R68o',
 	},
+
+	plugins: [
+		'~/plugins/vuetify',
+	],
+
+	css: [
+		'vuetify/dist/vuetify.css',
+	]
 };

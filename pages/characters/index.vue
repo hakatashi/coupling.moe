@@ -1,9 +1,13 @@
 <template>
-	<ul>
-		<li v-for="character in characters">
-			{{character.name}}
-		</li>
-	</ul>
+	<v-list>
+		<v-list-tile ripple v-for="character in characters">
+			<v-list-tile-content>
+				<v-list-tile-title>
+					{{character.name}}
+				</v-list-tile-title>
+			</v-list-tile-content>
+		</v-list-tile>
+	</v-list>
 </template>
 
 <script>
