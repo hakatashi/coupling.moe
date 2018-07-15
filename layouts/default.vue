@@ -1,6 +1,6 @@
 <template>
 	<v-app>
-		<v-navigation-drawer app>
+		<v-navigation-drawer v-model="drawer" app>
 			<v-list	>
 				<v-list-tile>
 					<v-list-tile-content>
@@ -23,7 +23,7 @@
 			</v-list>
 		</v-navigation-drawer>
 		<v-toolbar app dark color="cyan">
-			<v-toolbar-side-icon></v-toolbar-side-icon>
+			<v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
 			<v-toolbar-title>
 				<nuxt-link to="/" class="white--text">
 					カップリングデータベース
@@ -38,6 +38,16 @@
 		<v-footer app></v-footer>
 	</v-app>
 </template>
+
+<script>
+export default {
+	data() {
+		return {
+			drawer: false,
+		};
+	},
+}
+</script>
 
 <style>
 .button--green {
