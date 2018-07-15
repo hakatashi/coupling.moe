@@ -1,7 +1,35 @@
 <template>
 	<v-app>
-		<v-navigation-drawer app></v-navigation-drawer>
-		<v-toolbar app></v-toolbar>
+		<v-navigation-drawer app>
+			<v-list	>
+				<v-list-tile>
+					<v-list-tile-content>
+						<v-list-tile-title>
+							<nuxt-link to="/">
+								トップページ
+							</nuxt-link>
+						</v-list-tile-title>
+					</v-list-tile-content>
+				</v-list-tile>
+				<v-list-tile>
+					<v-list-tile-content>
+						<v-list-tile-title>
+							<nuxt-link to="/characters">
+								キャラクター
+							</nuxt-link>
+						</v-list-tile-title>
+					</v-list-tile-content>
+				</v-list-tile>
+			</v-list>
+		</v-navigation-drawer>
+		<v-toolbar app dark color="cyan">
+			<v-toolbar-side-icon></v-toolbar-side-icon>
+			<v-toolbar-title>
+				<nuxt-link to="/" class="white--text">
+					カップリングデータベース
+				</nuxt-link>
+			</v-toolbar-title>
+		</v-toolbar>
 		<v-content>
 			<v-container fluid>
 				<nuxt/>
@@ -12,22 +40,6 @@
 </template>
 
 <style>
-html {
-	font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-	font-size: 16px;
-	word-spacing: 1px;
-	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
-	box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-	box-sizing: border-box;
-	margin: 0;
-}
 .button--green {
 	display: inline-block;
 	border-radius: 4px;
@@ -61,5 +73,8 @@ html {
 .button--grey:hover {
 	color: #fff;
 	background-color: #35495e;
+}
+a {
+	text-decoration: none;
 }
 </style>

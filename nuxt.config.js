@@ -41,5 +41,11 @@ module.exports = {
 
 	css: [
 		'vuetify/dist/vuetify.css',
-	]
+	],
+
+	head: {
+		link: [
+			{rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
+		],
+	},
 };
