@@ -1,6 +1,6 @@
 <template>
 	<div class="display-3">
-		{{character ? character.name : ''}}
+		{{character ? character.name : '---'}}
 	</div>
 </template>
 

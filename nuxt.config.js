@@ -1,24 +1,13 @@
-module.exports = {
+const firebase = require('./lib/firebase.js');
+const db = firebase.firestore();
 
-	/*
-	 ** Build configuration
-	 */
+module.exports = {
 	build: {},
 
-	/*
-	 ** Headers
-	 ** Common headers are already provided by @nuxtjs/pwa preset
-	 */
 	head: {},
 
-	/*
-	 ** Customize the progress-bar color
-	 */
 	loading: {color: '#3B8070'},
 
-	/*
-	 ** Customize app manifest
-	 */
 	manifest: {
 		name: 'カップリングDB',
 		short_name: 'カップリングDB',
@@ -26,9 +15,6 @@ module.exports = {
 		gcm_sender_id: '103953800507',
 	},
 
-	/*
-	 ** Modules
-	 */
 	modules: ['@nuxtjs/pwa'],
 
 	env: {
@@ -47,5 +33,14 @@ module.exports = {
 		link: [
 			{rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
 		],
+	},
+
+	generate: {
+		routes: async () => {
+			const characters = await db.collection('characters').get();
+			return characters.docs.map((character) => (
+				`/characters/${character.get('name')}`
+			));
+		},
 	},
 };
