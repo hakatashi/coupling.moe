@@ -30,7 +30,7 @@ export default {
 	},
 	computed: {
 		...mapState({
-			characters: (state) => state.characters.list,
+			characters: (state) => state.characters.list.slice().sort((a, b) => a.ruby.localeCompare(b.ruby)),
 		}),
 	},
 	created() {
