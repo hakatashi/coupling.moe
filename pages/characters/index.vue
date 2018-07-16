@@ -36,7 +36,7 @@ export default {
 	created() {
 	},
 	mounted() {
-		this.$store.dispatch('characters/init');
+		this.$store.dispatch('characters/bindAll');
 	},
 	destroyed() {
 	},
