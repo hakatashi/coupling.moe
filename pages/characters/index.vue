@@ -1,6 +1,9 @@
 <template>
 	<v-list>
 		<v-list-tile v-for="character in characters" :key="character.id" nuxt :to="`/characters/${character.name}`">
+			<v-list-tile-avatar>
+				<img :src="character.imageUrl">
+			</v-list-tile-avatar>
 			<v-list-tile-content>
 				<v-list-tile-title>
 					{{character.name}}
