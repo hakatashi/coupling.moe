@@ -1,16 +1,22 @@
 <template>
-	<v-list>
-		<v-list-tile v-for="character in characters" :key="character.id" nuxt :to="`/characters/${character.name}`">
-			<v-list-tile-avatar>
-				<img :src="character.imageUrl">
-			</v-list-tile-avatar>
-			<v-list-tile-content>
-				<v-list-tile-title>
-					{{character.name}}
-				</v-list-tile-title>
-			</v-list-tile-content>
-		</v-list-tile>
-	</v-list>
+	<v-container grid-list-sm text-xs-center wrap>
+		<v-list>
+			<v-layout row wrap>
+				<v-flex v-for="character in characters" :key="character.id" xs12 sm6 md4 lg3 xl2>
+					<v-list-tile nuxt :to="`/characters/${character.name}`">
+						<v-list-tile-avatar>
+							<img :src="character.imageUrl">
+						</v-list-tile-avatar>
+						<v-list-tile-content>
+							<v-list-tile-title>
+								{{character.name}}
+							</v-list-tile-title>
+						</v-list-tile-content>
+					</v-list-tile>
+				</v-flex>
+			</v-layout>
+		</v-list>
+	</v-container>
 </template>
 
 <script>
