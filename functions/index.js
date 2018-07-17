@@ -10,7 +10,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 
 exports.incrementCounter = functions.pubsub.topic('minute-tick').onPublish(() => {
 	const counterRef = db.collection('counter').doc('counter');
-	db.runTransaction((transaction) => (
+	return db.runTransaction((transaction) => (
 		transaction.get(counterRef).then((counterTransaction) => (
 			transaction.update(counterRef, {
 				value: counterTransaction.data().value + 1,
