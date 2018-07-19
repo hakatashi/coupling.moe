@@ -1,5 +1,6 @@
 <template>
 	<v-container grid-list-sm text-xs-center wrap>
+		<v-progress-linear v-if="isLoading" :style="{margin: 0}" :indeterminate="true"></v-progress-linear>
 		<v-list>
 			<v-layout row wrap>
 				<v-flex v-for="character in characters" :key="character.id" xs12 sm6 md4 lg3 xl2>
@@ -30,6 +31,9 @@ export default {
 	},
 	computed: {
 		...mapState({
+			isLoading: (state) => (
+				!state.characters.isInitList
+			),
 			characters: (state) => {
 				if (!state.characters.list) {
 					return [];

@@ -15,9 +15,10 @@
 			<v-subheader>
 				{{character ? character.name : '---'}}のカップリング一覧
 			</v-subheader>
+			<v-progress-linear v-if="isLoading" :style="{margin: 0}" :indeterminate="true"></v-progress-linear>
 			<v-list>
 				<v-layout row wrap>
-					<v-flex v-for="coupling in couplings" :key="coupling.id" xs12 sm6 md6 lg6 xl6>
+					<v-flex v-for="coupling in couplings" :key="coupling.id" xs12 sm6 md6 lg4 xl3>
 						<v-list-tile nuxt :to="`/couplings/${coupling.id}`">
 							<v-list-tile-avatar>
 								<img :src="coupling.imageUrls[0]">
@@ -51,6 +52,7 @@ import firebase from '~/lib/firebase.js';
 export default {
 	data() {
 		return {
+			isLoading: true,
 		};
 	},
 	computed: {
@@ -58,13 +60,26 @@ export default {
 			return this.$store.getters['characters/getByName'](this.$route.params.name);
 		},
 		couplings() {
-			return this.character ? this.$store.getters['couplings/getByCharacter'](this.character.id) : [];
+			const couplings = this.character ? this.$store.getters['couplings/getByCharacter'](this.character.id) : [];
+			return couplings.map((coupling) => {
+				if (coupling.isReversible && coupling.character2.id === this.character.id) {
+					return {
+						...coupling,
+						character1: coupling.character2,
+						character2: coupling.character1,
+					};
+				}
+
+				return coupling;
+			});
 		},
 	},
 	created() {
 	},
 	mounted() {
-		this.$store.dispatch('characters/bind', this.$route.params.name);
+		this.$store.dispatch('characters/bind', this.$route.params.name).then(() => {
+			this.isLoading = false;
+		});
 	},
 	destroyed() {
 	},

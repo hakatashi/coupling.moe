@@ -34,8 +34,9 @@ export const actions = {
 			commit('initList');
 		}
 	},
-	bindList: firebaseAction(({bindFirebaseRef}) => {
+	bindList: firebaseAction(async ({bindFirebaseRef}) => {
 		bindFirebaseRef('list', charactersRef);
+		await charactersRef.get();
 	}),
 	bind: firebaseAction(async ({bindFirebaseRef, state, dispatch}, name) => {
 		if (state.data[name] !== undefined) {
@@ -48,9 +49,9 @@ export const actions = {
 			bindFirebaseRef(`data.${character.id}`, character.ref);
 
 			const couplings = await couplingsRef.where(`members.${character.id}`, '==', true).get();
-			for (const coupling of couplings.docs) {
-				dispatch('couplings/bind', coupling.id, {root: true});
-			}
+			await Promise.all(couplings.docs.map((coupling) => {
+				dispatch('couplings/bind', coupling.id, {root: true})
+			}));
 		}
 	}),
 };

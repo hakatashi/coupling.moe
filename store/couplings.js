@@ -36,11 +36,13 @@ export const actions = {
 	bindList: firebaseAction(({bindFirebaseRef}) => {
 		bindFirebaseRef('list', couplingsRef);
 	}),
-	bind: firebaseAction(({bindFirebaseRef, state}, id) => {
+	bind: firebaseAction(async ({bindFirebaseRef, state}, id) => {
 		if (state.data[name] !== undefined) {
 			return;
 		}
 
-		bindFirebaseRef(`data.${id}`, couplingsRef.doc(id));
+		const couplingRef = couplingsRef.doc(id);
+		bindFirebaseRef(`data.${id}`, couplingRef);
+		await couplingRef.get();
 	}),
 };
