@@ -24,7 +24,12 @@ export const getters = {
 		(name) => (
 			[...state.list, ...Object.values(state.data)].find((datum) => datum.name === name)
 		)
-	)
+	),
+	getMemberByName: (state) => (
+		(name) => (
+			Object.values(state.data).find((datum) => datum.name === name)
+		)
+	),
 };
 
 export const actions = {
@@ -38,8 +43,8 @@ export const actions = {
 		bindFirebaseRef('list', charactersRef);
 		await charactersRef.get();
 	}),
-	bind: firebaseAction(async ({bindFirebaseRef, state, dispatch}, name) => {
-		if (state.data[name] !== undefined) {
+	bind: firebaseAction(async ({bindFirebaseRef, state, dispatch, getters}, name) => {
+		if (getters.getMemberByName(name) !== undefined) {
 			return;
 		}
 

@@ -37,7 +37,7 @@ export const actions = {
 		bindFirebaseRef('list', couplingsRef);
 	}),
 	bind: firebaseAction(async ({bindFirebaseRef, state}, id) => {
-		if (state.data[name] !== undefined) {
+		if (state.data[id] !== undefined) {
 			return;
 		}
 
