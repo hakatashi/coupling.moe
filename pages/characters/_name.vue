@@ -26,6 +26,15 @@
 								<v-list-tile-title>
 									{{coupling.names[0]}}
 								</v-list-tile-title>
+								<v-list-tile-sub-title>
+									<span :style="{color: coupling.character1.color}">
+										{{coupling.character1.name}}
+									</span>
+									×
+									<span :style="{color: coupling.character2.color}">
+										{{coupling.character2.name}}
+									</span>
+								</v-list-tile-sub-title>
 							</v-list-tile-content>
 						</v-list-tile>
 					</v-flex>
