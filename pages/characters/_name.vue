@@ -28,11 +28,11 @@
 									{{coupling.names[0]}}
 								</v-list-tile-title>
 								<v-list-tile-sub-title>
-									<span :style="{color: coupling.character1.color}">
+									<span :style="{color: coupling.character1.color, fontWeight: 'bold'}">
 										{{coupling.character1.name}}
 									</span>
 									×
-									<span :style="{color: coupling.character2.color}">
+									<span :style="{color: coupling.character2.color, fontWeight: 'bold'}">
 										{{coupling.character2.name}}
 									</span>
 								</v-list-tile-sub-title>
