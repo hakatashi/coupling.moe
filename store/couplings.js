@@ -6,7 +6,7 @@ const couplingsRef = db.collection('couplings');
 
 export const state = () => ({
 	isInitList: false,
-	list: null,
+	list: [],
 	data: {},
 });
 
@@ -19,6 +19,11 @@ export const mutations = {
 export const getters = {
 	list: (state) => state.list,
 	data: (state) => state.data,
+	getByCharacter: (state) => (
+		(character) => (
+			[...state.list, ...Object.values(state.data)].filter((datum) => datum.members[character] === true)
+		)
+	)
 };
 
 export const actions = {
