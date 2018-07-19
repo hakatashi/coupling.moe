@@ -42,7 +42,7 @@ export default {
 	created() {
 	},
 	mounted() {
-		this.$store.dispatch('characters/bindAll');
+		this.$store.dispatch('characters/initList');
 	},
 	destroyed() {
 	},

@@ -25,7 +25,7 @@
     "firebase": "^5.2.0",
     "localforage": "^1.7.2",
     "vuex-persist": "^1.4.3",
-    "vuexfire": "^3.0.0-alpha.5",
+    "vuexfire": "hakatashi/vuexfire#3.0.0-alpha.5.hakatashi.1",
     "vuetify": "^1.1.4"
   }
 }
