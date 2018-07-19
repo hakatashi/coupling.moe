@@ -3,10 +3,11 @@ import firebase from '~/lib/firebase.js';
 import db from '~/lib/db.js';
 
 const charactersRef = db.collection('characters');
+const couplingsRef = db.collection('couplings');
 
 export const state = () => ({
 	isInitList: false,
-	list: null,
+	list: [],
 	data: {},
 });
 
@@ -19,6 +20,11 @@ export const mutations = {
 export const getters = {
 	list: (state) => state.list,
 	data: (state) => state.data,
+	getByName: (state) => (
+		(name) => (
+			[...state.list, ...Object.values(state.data)].find((datum) => datum.name === name)
+		)
+	)
 };
 
 export const actions = {
@@ -31,14 +37,20 @@ export const actions = {
 	bindList: firebaseAction(({bindFirebaseRef}) => {
 		bindFirebaseRef('list', charactersRef);
 	}),
-	bind: firebaseAction(async ({bindFirebaseRef, state}, name) => {
+	bind: firebaseAction(async ({bindFirebaseRef, state, dispatch}, name) => {
 		if (state.data[name] !== undefined) {
 			return;
 		}
 
 		const characters = await charactersRef.where('name', '==', name).get();
 		if (!characters.empty) {
-			bindFirebaseRef(`data.${name}`, characters.docs[0].ref);
+			const character = characters.docs[0];
+			bindFirebaseRef(`data.${character.id}`, character.ref);
+
+			const couplings = await couplingsRef.where(`members.${character.id}`, '==', true).get();
+			for (const coupling of couplings.docs) {
+				dispatch('couplings/bind', coupling.id, {root: true});
+			}
 		}
 	}),
 };

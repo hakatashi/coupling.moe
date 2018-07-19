@@ -15,7 +15,7 @@ export default {
 	},
 	computed: {
 		character() {
-			return this.$store.state.characters.data[this.$route.params.name];
+			return this.$store.getters['characters/getByName'](this.$route.params.name);
 		},
 	},
 	created() {
