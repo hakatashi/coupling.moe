@@ -3,6 +3,7 @@ node_js:
   - node
 dist: trusty
 sudo: false
+install: npm install
 script:
   - npm run generate -- --spa
 branches:
