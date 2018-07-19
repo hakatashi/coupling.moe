@@ -1,19 +1,81 @@
 <template>
 	<div>
-		<div class="character-header" :style="{backgroundColor: character && character.color}">
+		<div class="character-header" :style="{backgroundColor: character ? character.color : 'grey'}">
 			<div class="display-3 white--text">
-				{{character ? character.name : '---'}}
+				{{character ? character.name : $route.params.name}}
 			</div>
 			<div class="character-ruby headline white--text">
-				{{character ? character.ruby : '---'}}
+				{{character ? character.ruby : ''}}
 			</div>
+			<v-dialog
+				v-model="isChangeColorDialogShowing"
+				width="500"
+			>
+				<v-btn
+					slot="activator"
+					flat
+					icon
+					color="white"
+					class="character-change-color"
+				>
+					<v-icon>
+						format_color_fill
+					</v-icon>
+				</v-btn>
+				<v-card class="change-color-dialog">
+					<v-card-title
+						class="headline grey lighten-2"
+						primary-title
+					>
+						テーマカラーを変更する
+					</v-card-title>
+					<v-alert
+						:value="true"
+						type="warning"
+					>
+						テーマカラーは全ユーザー共通です
+					</v-alert>
+					<v-card-text>
+						<div class="colors">
+							<div
+								v-for="color in themeColors"
+								:key="color"
+								class="color"
+								:style="{
+									backgroundColor: color,
+								}"
+								@click="onClickColor(color)"
+							>
+								<div
+									v-if="selectedColor === color" class="circle"
+									:style="{
+										borderColor: color,
+									}"
+								>
+								</div>
+							</div>
+						</div>
+					</v-card-text>
+					<v-divider></v-divider>
+					<v-card-actions>
+						<v-spacer></v-spacer>
+						<v-btn
+							color="primary"
+							flat
+							@click="onClickChangeColor"
+						>
+							変更する
+						</v-btn>
+					</v-card-actions>
+				</v-card>
+			</v-dialog>
 			<v-avatar class="character-avatar" size="128" color="grey">
 				<img :src="character && character.imageUrl">
 			</v-avatar>
 		</div>
 		<v-container grid-list-sm text-xs-center wrap>
 			<v-subheader>
-				{{character ? character.name : '---'}}のカップリング一覧
+				{{character ? character.name : $route.params.name}}のカップリング一覧
 			</v-subheader>
 			<v-progress-linear v-if="isLoading" :style="{margin: 0}" :indeterminate="true"></v-progress-linear>
 			<v-list>
@@ -48,11 +110,18 @@
 <script>
 import {mapState} from 'vuex';
 import firebase from '~/lib/firebase.js';
+import db from '~/lib/db.js';
+import {themeColors} from '~/lib/constants.js';
+
+const charactersRef = db.collection('characters');
 
 export default {
 	data() {
 		return {
 			isLoading: true,
+			isChangeColorDialogShowing: false,
+			themeColors,
+			temporalColor: null,
 		};
 	},
 	computed: {
@@ -73,6 +142,13 @@ export default {
 				return coupling;
 			});
 		},
+		selectedColor() {
+			if (this.temporalColor === null && this.character) {
+				return this.character.color;
+			}
+
+			return this.temporalColor;
+		},
 	},
 	created() {
 	},
@@ -84,6 +160,18 @@ export default {
 	destroyed() {
 	},
 	methods: {
+		onClickColor(color) {
+			this.temporalColor = color;
+		},
+		async onClickChangeColor() {
+			if (this.temporalColor !== null) {
+				charactersRef.doc(this.character.id).update({
+					color: this.temporalColor,
+				});
+				this.temporalColor = null;
+			}
+			this.isChangeColorDialogShowing = false;
+		}
 	},
 };
 </script>
@@ -101,10 +189,51 @@ export default {
 	opacity: 0.5;
 }
 
+.character-change-color {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.character-change-color:hover {
+	position: absolute;
+}
+
 .character-avatar {
 	position: absolute;
 	bottom: 0;
 	left: 50%;
 	transform: translate(-50%, 50%);
+}
+
+.change-color-dialog .colors {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.change-color-dialog .colors::after {
+	content: '';
+	flex: auto;
+}
+
+.change-color-dialog .color {
+	width: 30px;
+	height: 30px;
+	margin: 10px;
+	border-radius: 50%;
+	cursor: pointer;
+	position: relative;
+}
+
+.change-color-dialog .color .circle {
+	position: absolute;
+	top: -6px;
+	left: -6px;
+	right: -6px;
+	bottom: -6px;
+	border-width: 3px;
+	border-style: solid;
+	border-radius: 50%;
 }
 </style>
