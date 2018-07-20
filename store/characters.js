@@ -1,23 +1,22 @@
-import {firebaseAction, firebaseMutations} from 'vuexfire/out/index.js';
-import firebase from '~/lib/firebase.js';
 import db from '~/lib/db.js';
+import {firebaseAction} from 'vuexfire/out/index.js';
 
 const charactersRef = db.collection('characters');
 const couplingsRef = db.collection('couplings');
 
-export const state = () => ({
+const localState = () => ({
 	isInitList: false,
 	list: [],
 	data: {},
 });
 
-export const mutations = {
+const localMutations = {
 	initList(state) {
 		state.isInitList = true;
 	},
 };
 
-export const getters = {
+const localGetters = {
 	list: (state) => state.list,
 	data: (state) => state.data,
 	getByName: (state) => (
@@ -32,7 +31,7 @@ export const getters = {
 	),
 };
 
-export const actions = {
+const localActions = {
 	async initList({state, dispatch, commit}) {
 		if (!state.isInitList) {
 			await dispatch('bindList');
@@ -43,7 +42,7 @@ export const actions = {
 		bindFirebaseRef('list', charactersRef);
 		await charactersRef.get();
 	}),
-	bind: firebaseAction(async ({bindFirebaseRef, state, dispatch, getters}, name) => {
+	bind: firebaseAction(async ({bindFirebaseRef, dispatch, getters}, name) => {
 		if (getters.getMemberByName(name) !== undefined) {
 			return;
 		}
@@ -54,9 +53,16 @@ export const actions = {
 			bindFirebaseRef(`data.${character.id}`, character.ref);
 
 			const couplings = await couplingsRef.where(`members.${character.id}`, '==', true).get();
-			await Promise.all(couplings.docs.map((coupling) => {
+			await Promise.all(couplings.docs.map((coupling) => (
 				dispatch('couplings/bind', coupling.id, {root: true})
-			}));
+			)));
 		}
 	}),
+};
+
+export {
+	localState as state,
+	localMutations as mutations,
+	localGetters as getters,
+	localActions as actions,
 };
