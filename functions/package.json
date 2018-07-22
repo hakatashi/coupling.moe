@@ -6,7 +6,8 @@
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "build": "babel index.babel.js --out-file index.js --presets=env"
   },
   "dependencies": {
     "firebase-admin": "~5.12.1",
