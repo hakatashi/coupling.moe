@@ -79,11 +79,4 @@ exports.updateImages = functions.pubsub.topic('fifteen-minute-tick').onPublish(a
 		images,
 		imagesUpdatedAt: new Date(),
 	});
-	const counterRef = db.collection('counter').doc('counter');
-	await db.runTransaction(async (transaction) => {
-		const counterTransaction = await transaction.get(counterRef);
-		transaction.update(counterRef, {
-			value: counterTransaction.data().value + 1,
-		});
-	});
 });
