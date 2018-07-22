@@ -9,9 +9,9 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 	response.send('Hello from Firebase!');
 });
 
-exports.incrementCounter = functions.pubsub.topic('minute-tick').onPublish(() => {
+exports.incrementCounter = functions.pubsub.topic('minute-tick').onPublish(async () => {
 	const counterRef = db.collection('counter').doc('counter');
-	db.runTransaction(async (transaction) => {
+	await db.runTransaction(async (transaction) => {
 		const counterTransaction = await transaction.get(counterRef);
 		transaction.update(counterRef, {
 			value: counterTransaction.data().value + 1,
