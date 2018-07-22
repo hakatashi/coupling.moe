@@ -19,6 +19,7 @@ module.exports = {
 	rules: {
 		'vue/html-indent': ['error', 'tab'],
 		'node/no-unsupported-features': 'off',
+		'max-params': 'off',
 	},
 	globals: {},
 };

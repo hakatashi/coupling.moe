@@ -14,7 +14,7 @@
 				<v-list-tile>
 					<v-list-tile-content>
 						<v-list-tile-title>
-							<nuxt-link to="/characters">
+							<nuxt-link to="/imas346">
 								キャラクター
 							</nuxt-link>
 						</v-list-tile-title>

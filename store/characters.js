@@ -42,7 +42,7 @@ const localActions = {
 		bindFirebaseRef('list', charactersRef);
 		await charactersRef.get();
 	}),
-	bind: firebaseAction(async ({bindFirebaseRef, dispatch, getters}, name) => {
+	bindByName: firebaseAction(async ({bindFirebaseRef, dispatch, getters}, name) => {
 		if (getters.getMemberByName(name) !== undefined) {
 			return;
 		}
