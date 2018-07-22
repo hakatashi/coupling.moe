@@ -10,6 +10,7 @@
     "build": "babel index.babel.js --out-file index.js --presets=env"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "firebase-admin": "~5.12.1",
     "firebase-functions": "^1.0.3",
     "googleapis": "^32.0.0"
