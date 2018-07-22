@@ -55,6 +55,7 @@ const localActions = {
 		await couplingRef.get();
 	}),
 	async bindByCharacterNames({dispatch, rootGetters}, characterNames) {
+		// TODO: データ取得ではなくIDを取得した段階でresolveすることができる
 		await Promise.all(characterNames.map((name) => (
 			dispatch('characters/bindByName', name, {root: true})
 		)));

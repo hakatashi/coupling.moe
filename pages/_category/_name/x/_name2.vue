@@ -1,20 +1,41 @@
 <template>
 	<div>
-		<div class="character-header" :style="{backgroundColor: isLoading ? 'grey' : 'blue'}">
-			<div class="display-3 white--text">
-				{{coupling ? coupling.names[0] : `${$route.params.name}×${$route.params.name2}`}}
-			</div>
-			<div class="character-ruby headline white--text">
-				うめみれ
-			</div>
-			<v-avatar class="character-avatar" size="128" color="grey">
-				<img src="">
-			</v-avatar>
+		<v-progress-linear v-if="isLoading" :style="{margin: 0}" :indeterminate="true"></v-progress-linear>
+		<div class="display-3">
+			{{coupling ? coupling.names[0] : `${$route.params.name}×${$route.params.name2}`}}
 		</div>
 		<v-container grid-list-sm text-xs-center wrap>
 			<v-subheader>
-				ほげ
+				{{coupling ? coupling.pixpediaDescription : ''}}
 			</v-subheader>
+			<v-layout>
+				<v-flex>
+					<v-card>
+						<v-container grid-list-xs fluid>
+							<v-layout row wrap>
+								<v-flex
+									v-for="image in coupling ? coupling.images : []"
+									:key="image.link"
+									xs4
+								>
+									<v-card
+										:href="image.image && image.image.contextLink"
+										target="_blank"
+										flat
+										tile
+										nuxt
+									>
+										<v-card-media
+											:src="image.link"
+											height="150px"
+										></v-card-media>
+									</v-card>
+								</v-flex>
+							</v-layout>
+						</v-container>
+					</v-card>
+				</v-flex>
+			</v-layout>
 		</v-container>
 	</div>
 </template>
@@ -74,22 +95,4 @@ export default {
 </script>
 
 <style>
-.character-header {
-	text-align: center;
-	position: relative;
-	padding-top: 32px;
-	padding-bottom: 80px;
-	margin-bottom: 64px;
-}
-
-.character-ruby {
-	opacity: 0.5;
-}
-
-.character-avatar {
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	transform: translate(-50%, 50%);
-}
 </style>
