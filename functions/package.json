@@ -13,5 +13,9 @@
     "firebase-functions": "^1.0.3",
     "googleapis": "^32.0.0"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
 }
