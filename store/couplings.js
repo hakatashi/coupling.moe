@@ -26,6 +26,9 @@ const localGetters = {
 	getByCharacterNames: (state, getters, rootState, rootGetters) => (
 		(names) => {
 			const characters = names.map((name) => rootGetters['characters/getByName'](name));
+			if (characters.some((character) => character === undefined)) {
+				return [];
+			}
 			return [...state.list, ...Object.values(state.data)].filter((datum) => (
 				characters.every((character) => (
 					datum.members[character.id] === true
