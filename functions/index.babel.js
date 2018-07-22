@@ -1,5 +1,3 @@
-require('babel-polyfill');
-
 const functions = require('firebase-functions');
 const firebase = require('firebase-admin');
 
