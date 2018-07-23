@@ -51,7 +51,7 @@ exports.updateImages = functions.pubsub.topic('fifteen-minute-tick').onPublish(a
 	console.log(`Fetching images for ${inspect(coupling.data())}`);
 
 	const searchResult = await customsearch.cse.list({
-		q: coupling.get('names').map((name) => `"${name}"`).join(' OR '),
+		q: `${coupling.get('names').map((name) => `"${name}"`).join(' OR ')} アイドルマスターシンデレラガールズ`,
 		cx: functions.config().cronjobs.customsearch_engine_id,
 		lr: 'lang_ja',
 		num: 10,
