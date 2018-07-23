@@ -38,9 +38,17 @@ module.exports = {
 	generate: {
 		routes: async () => {
 			const characters = await db.collection('characters').get();
-			return characters.docs.map((character) => (
-				`/characters/${character.get('name')}`
-			));
+			const couplings = await db.collection('couplings').get();
+			return [
+				...characters.docs.map((character) => (
+					`/imas346/${character.get('name')}`
+				)),
+				...couplings.docs.map((coupling) => {
+					const character1 = characters.docs.find((character) => character.id === coupling.get('character1').id);
+					const character2 = characters.docs.find((character) => character.id === coupling.get('character2').id);
+					return `/imas346/${character1.get('name')}/x/${character2.get('name')}`
+				}),
+			];
 		},
 	},
 };
