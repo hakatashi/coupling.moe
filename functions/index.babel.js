@@ -59,9 +59,11 @@ exports.updateImages = functions.pubsub.topic('fifteen-minute-tick').onPublish(a
 		auth: googleClient,
 	});
 
+	console.log(`Search result: ${inspect(searchResult)}`);
+
 	const images = [];
 
-	for (const item of searchResult.data.items) {
+	for (const item of searchResult.data.items || []) {
 		const result = await imagesRef.where('link', '==', item.link).get();
 
 		if (result.empty) {

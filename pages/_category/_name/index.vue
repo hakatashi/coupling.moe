@@ -136,7 +136,7 @@ export default {
 		couplings() {
 			const couplings = this.character ? this.$store.getters['couplings/getByCharacter'](this.character.id) : [];
 			return couplings.map((coupling) => {
-				if (coupling.isReversible && coupling.character2.id === this.character.id) {
+				if (coupling.isReversible && coupling.character2.name === this.character.name) {
 					return {
 						...coupling,
 						originalCharacter1: coupling.character1,
