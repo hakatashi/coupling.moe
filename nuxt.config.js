@@ -4,8 +4,6 @@ const db = firebase.firestore();
 module.exports = {
 	build: {},
 
-	head: {},
-
 	loading: {color: '#3B8070'},
 
 	manifest: {
@@ -46,7 +44,7 @@ module.exports = {
 				...couplings.docs.map((coupling) => {
 					const character1 = characters.docs.find((character) => character.id === coupling.get('character1').id);
 					const character2 = characters.docs.find((character) => character.id === coupling.get('character2').id);
-					return `/imas346/${character1.get('name')}/x/${character2.get('name')}`
+					return `/imas346/${character1.get('name')}/x/${character2.get('name')}`;
 				}),
 			];
 		},
