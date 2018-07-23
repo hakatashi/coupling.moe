@@ -59,6 +59,11 @@ export default {
 </script>
 
 <style>
+@font-face {
+	font-family: coupling-font;
+	src: url("/NotoSerifCJKjp-Black-subset.woff2") format("woff2"),
+		url("/NotoSerifCJKjp-Black-subset.woff") format("woff");
+}
 .button--green {
 	display: inline-block;
 	border-radius: 4px;
