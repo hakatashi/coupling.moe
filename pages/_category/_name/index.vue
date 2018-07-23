@@ -125,7 +125,9 @@ export default {
 		};
 	},
 	async fetch({store, params}) {
-		await store.dispatch('characters/bindByName', params.name);
+		if (!process.browser) {
+			await store.dispatch('characters/bindByName', params.name);
+		}
 	},
 	computed: {
 		character() {

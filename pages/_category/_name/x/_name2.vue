@@ -79,10 +79,12 @@ export default {
 		};
 	},
 	async fetch({store, params}) {
-		await store.dispatch('couplings/bindByCharacterNames', [
-			params.name,
-			params.name2,
-		]);
+		if (!process.browser) {
+			await store.dispatch('couplings/bindByCharacterNames', [
+				params.name,
+				params.name2,
+			]);
+		}
 	},
 	computed: {
 		coupling() {

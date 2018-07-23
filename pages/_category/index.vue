@@ -30,7 +30,9 @@ export default {
 		};
 	},
 	async fetch({store}) {
-		await store.dispatch('characters/initList');
+		if (!process.browser) {
+			await store.dispatch('characters/initList');
+		}
 	},
 	computed: {
 		...mapState({

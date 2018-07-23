@@ -45,7 +45,9 @@ import db from '~/lib/db.js';
 export default {
 	components: {Logo},
 	async fetch({store}) {
-		await store.dispatch('init');
+		if (!process.browser) {
+			await store.dispatch('init');
+		}
 	},
 	data() {
 		return {
