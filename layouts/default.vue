@@ -33,7 +33,20 @@
 		<v-content>
 			<nuxt/>
 		</v-content>
-		<v-footer app></v-footer>
+		<v-footer app>
+			<v-flex
+				text-xs-center
+				xs12
+			>
+				このサイトは開発中です - <a href="https://github.com/hakatashi/coupling.moe" target="_blank">
+					GitHub
+				</a> - <a href="https://twitter.com/hakatashi" target="_blank">
+					開発者Twitter
+				</a> - <a href="https://travis-ci.org/hakatashi/coupling.moe" target="_blank">
+					Travis-CI
+				</a>
+			</v-flex>
+		</v-footer>
 	</v-app>
 </template>
 
