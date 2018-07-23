@@ -145,6 +145,7 @@ export default {
 	font-family: coupling-font;
 	font-weight: 900;
 	color: #444;
+	font-feature-settings: "palt";
 }
 .coupling-name {
 	margin: 1em 0;
