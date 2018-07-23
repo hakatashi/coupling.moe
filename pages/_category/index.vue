@@ -29,6 +29,9 @@ export default {
 		return {
 		};
 	},
+	async fetch({store}) {
+		await store.dispatch('characters/initList');
+	},
 	computed: {
 		...mapState({
 			isLoading: (state) => (

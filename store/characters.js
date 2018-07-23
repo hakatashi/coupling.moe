@@ -7,26 +7,35 @@ const couplingsRef = db.collection('couplings');
 const localState = () => ({
 	isInitList: false,
 	list: [],
+	isInitData: {},
 	data: {},
 });
 
 const localMutations = {
 	initList(state) {
-		state.isInitList = true;
+		if (process.browser) {
+			state.isInitList = true;
+		}
+	},
+	initData(state, id) {
+		if (process.browser) {
+			state.isInitData[id] = true;
+		}
 	},
 };
 
 const localGetters = {
 	list: (state) => state.list,
 	data: (state) => state.data,
-	getByName: (state) => (
+	anotatedData: (state) => Object.entries(state.data).map(([id, datum]) => ({...datum, id})),
+	getByName: (state, getters) => (
 		(name) => (
-			[...state.list, ...Object.values(state.data)].find((datum) => datum.name === name)
+			[...state.list, ...getters.anotatedData].find((datum) => datum.name === name)
 		)
 	),
-	getMemberByName: (state) => (
+	getMemberByName: (state, getters) => (
 		(name) => (
-			Object.values(state.data).find((datum) => datum.name === name)
+			getters.anotatedData.find((datum) => datum.name === name)
 		)
 	),
 };
@@ -42,8 +51,9 @@ const localActions = {
 		bindFirebaseRef('list', charactersRef);
 		await charactersRef.get();
 	}),
-	bindByName: firebaseAction(async ({bindFirebaseRef, dispatch, getters}, name) => {
-		if (getters.getMemberByName(name) !== undefined) {
+	bindByName: firebaseAction(async ({bindFirebaseRef, state, dispatch, getters, commit}, name) => {
+		const localCharacter = getters.getMemberByName(name);
+		if (localCharacter !== undefined && state.isInitData[localCharacter.id] === true) {
 			return;
 		}
 
@@ -51,6 +61,7 @@ const localActions = {
 		if (!characters.empty) {
 			const character = characters.docs[0];
 			bindFirebaseRef(`data.${character.id}`, character.ref);
+			commit('initData', character.id);
 
 			const couplings = await couplingsRef.where(`members.${character.id}`, '==', true).get();
 			await Promise.all(couplings.docs.map((coupling) => (

@@ -6,12 +6,20 @@ const couplingsRef = db.collection('couplings');
 const localState = () => ({
 	isInitList: false,
 	list: [],
+	isInitData: {},
 	data: {},
 });
 
 const localMutations = {
 	initList(state) {
-		state.isInitList = true;
+		if (process.browser) {
+			state.isInitList = true;
+		}
+	},
+	initData(state, id) {
+		if (process.browser) {
+			state.isInitData[id] = true;
+		}
 	},
 };
 
@@ -48,13 +56,14 @@ const localActions = {
 	bindList: firebaseAction(({bindFirebaseRef}) => {
 		bindFirebaseRef('list', couplingsRef);
 	}),
-	bind: firebaseAction(async ({bindFirebaseRef, state}, id) => {
-		if (state.data[id] !== undefined) {
+	bind: firebaseAction(async ({bindFirebaseRef, state, commit}, id) => {
+		if (state.isInitData[id] === true) {
 			return;
 		}
 
 		const couplingRef = couplingsRef.doc(id);
 		bindFirebaseRef(`data.${id}`, couplingRef);
+		commit('initData', id);
 		await couplingRef.get();
 	}),
 	async bindByCharacterNames({dispatch, rootGetters}, characterNames) {

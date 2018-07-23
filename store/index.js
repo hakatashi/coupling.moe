@@ -14,7 +14,9 @@ export const state = () => ({
 export const mutations = {
 	...firebaseMutations,
 	initCounter(state) {
-		state.isInitCounter = true;
+		if (process.browser) {
+			state.isInitCounter = true;
+		}
 	},
 };
 
@@ -29,8 +31,9 @@ export const actions = {
 			commit('initCounter');
 		}
 	},
-	bindCounter: firebaseAction(({bindFirebaseRef}) => {
+	bindCounter: firebaseAction(async ({bindFirebaseRef}) => {
 		bindFirebaseRef('counter', counterRef);
+		await counterRef.get();
 	}),
 	increment: firebaseAction((context) => {
 		if (context.getters.counter !== null) {

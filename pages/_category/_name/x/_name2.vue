@@ -78,6 +78,12 @@ export default {
 			temporalColor: null,
 		};
 	},
+	async fetch({store, params}) {
+		await store.dispatch('couplings/bindByCharacterNames', [
+			params.name,
+			params.name2,
+		]);
+	},
 	computed: {
 		coupling() {
 			return this.$store.getters['couplings/getByCharacterNames']([

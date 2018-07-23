@@ -38,6 +38,8 @@ module.exports = {
 			const characters = await db.collection('characters').get();
 			const couplings = await db.collection('couplings').get();
 			return [
+				'/',
+				'/imas346/',
 				...characters.docs.map((character) => (
 					`/imas346/${character.get('name')}`
 				)),

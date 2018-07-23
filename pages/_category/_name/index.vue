@@ -124,6 +124,9 @@ export default {
 			temporalColor: null,
 		};
 	},
+	async fetch({store, params}) {
+		await store.dispatch('characters/bindByName', params.name);
+	},
 	computed: {
 		character() {
 			return this.$store.getters['characters/getByName'](this.$route.params.name);
