@@ -48,8 +48,7 @@ const localActions = {
 		}
 	},
 	bindList: firebaseAction(async ({bindFirebaseRef}) => {
-		bindFirebaseRef('list', charactersRef);
-		await charactersRef.get();
+		await bindFirebaseRef('list', charactersRef);
 	}),
 	bindByName: firebaseAction(async ({bindFirebaseRef, state, dispatch, getters, commit}, name) => {
 		const localCharacter = getters.getMemberByName(name);
@@ -60,13 +59,16 @@ const localActions = {
 		const characters = await charactersRef.where('name', '==', name).get();
 		if (!characters.empty) {
 			const character = characters.docs[0];
-			bindFirebaseRef(`data.${character.id}`, character.ref);
+			const characterBindPromise = bindFirebaseRef(`data.${character.id}`, character.ref);
 			commit('initData', character.id);
 
 			const couplings = await couplingsRef.where(`members.${character.id}`, '==', true).get();
-			await Promise.all(couplings.docs.map((coupling) => (
-				dispatch('couplings/bind', coupling.id, {root: true})
-			)));
+			await Promise.all([
+				characterBindPromise,
+				...couplings.docs.map((coupling) => (
+					dispatch('couplings/bind', coupling.id, {root: true})
+				)),
+			]);
 		}
 	}),
 };

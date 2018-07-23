@@ -32,8 +32,7 @@ export const actions = {
 		}
 	},
 	bindCounter: firebaseAction(async ({bindFirebaseRef}) => {
-		bindFirebaseRef('counter', counterRef);
-		await counterRef.get();
+		await bindFirebaseRef('counter', counterRef);
 	}),
 	increment: firebaseAction((context) => {
 		if (context.getters.counter !== null) {

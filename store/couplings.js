@@ -53,8 +53,8 @@ const localActions = {
 			commit('initList');
 		}
 	},
-	bindList: firebaseAction(({bindFirebaseRef}) => {
-		bindFirebaseRef('list', couplingsRef);
+	bindList: firebaseAction(async ({bindFirebaseRef}) => {
+		await bindFirebaseRef('list', couplingsRef);
 	}),
 	bind: firebaseAction(async ({bindFirebaseRef, state, commit}, id) => {
 		if (state.isInitData[id] === true) {
@@ -62,9 +62,8 @@ const localActions = {
 		}
 
 		const couplingRef = couplingsRef.doc(id);
-		bindFirebaseRef(`data.${id}`, couplingRef);
 		commit('initData', id);
-		await couplingRef.get();
+		await bindFirebaseRef(`data.${id}`, couplingRef);
 	}),
 	async bindByCharacterNames({dispatch, rootGetters}, characterNames) {
 		// TODO: データ取得ではなくIDを取得した段階でresolveすることができる
