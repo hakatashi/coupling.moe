@@ -22,9 +22,25 @@
 			</div>
 		</div>
 		<div class="display-1 text-xs-center" :style="{opacity: isLoading ? 0.1 : 1, display: 'flex', flexDirection: 'row', justifyContent: 'center'}">
-			<span :style="{color: character1.color, fontWeight: 'bold'}">{{character1.name}}</span>
+			<nuxt-link
+				:to="`/imas346/${character1.name}/`"
+				:style="{
+					color: character1.color,
+					fontWeight: 'bold',
+				}"
+			>
+				{{character1.name}}
+			</nuxt-link>
 			×
-			<span :style="{color: character2.color, fontWeight: 'bold'}">{{character2.name}}</span>
+			<nuxt-link
+				:to="`/imas346/${character2.name}/`"
+				:style="{
+					color: character2.color,
+					fontWeight: 'bold',
+				}"
+			>
+				{{character2.name}}
+			</nuxt-link>
 		</div>
 		<v-container grid-list-sm text-xs-center wrap>
 			<v-subheader>
