@@ -14,9 +14,7 @@ export const state = () => ({
 export const mutations = {
 	...firebaseMutations,
 	initCounter(state) {
-		if (process.browser) {
-			state.isInitCounter = true;
-		}
+		state.isInitCounter = process.browser;
 	},
 };
 
@@ -26,7 +24,7 @@ export const getters = {
 
 export const actions = {
 	async init({state, dispatch, commit}) {
-		if (!state.isInitCounter) {
+		if (state.isInitCounter !== process.browser) {
 			await dispatch('bindCounter');
 			commit('initCounter');
 		}

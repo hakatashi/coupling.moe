@@ -34,7 +34,6 @@ module.exports = {
 	},
 
 	generate: {
-		interval: 1000,
 		routes: async () => {
 			const characters = await db.collection('characters').get();
 			const couplings = await db.collection('couplings').get();

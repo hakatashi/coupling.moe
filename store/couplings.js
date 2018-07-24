@@ -12,14 +12,10 @@ const localState = () => ({
 
 const localMutations = {
 	initList(state) {
-		if (process.browser) {
-			state.isInitList = true;
-		}
+		state.isInitList = process.browser;
 	},
 	initData(state, id) {
-		if (process.browser) {
-			state.isInitData[id] = true;
-		}
+		state.isInitData[id] = process.browser;
 	},
 };
 
@@ -57,7 +53,7 @@ const localActions = {
 		await bindFirebaseRef('list', couplingsRef);
 	}),
 	bind: firebaseAction(async ({bindFirebaseRef, state, commit}, id) => {
-		if (state.isInitData[id] === true) {
+		if (state.isInitData[id] === process.browser) {
 			return;
 		}
 

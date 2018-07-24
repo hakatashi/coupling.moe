@@ -13,14 +13,10 @@ const localState = () => ({
 
 const localMutations = {
 	initList(state) {
-		if (process.browser) {
-			state.isInitList = true;
-		}
+		state.isInitList = process.browser;
 	},
 	initData(state, id) {
-		if (process.browser) {
-			state.isInitData[id] = true;
-		}
+		state.isInitData[id] = process.browser;
 	},
 };
 
@@ -42,7 +38,7 @@ const localGetters = {
 
 const localActions = {
 	async initList({state, dispatch, commit}) {
-		if (!state.isInitList) {
+		if (state.isInitList !== process.browser) {
 			await dispatch('bindList');
 			commit('initList');
 		}
@@ -52,7 +48,7 @@ const localActions = {
 	}),
 	bindByName: firebaseAction(async ({bindFirebaseRef, state, dispatch, getters, commit}, name) => {
 		const localCharacter = getters.getMemberByName(name);
-		if (localCharacter !== undefined && state.isInitData[localCharacter.id] === true) {
+		if (localCharacter !== undefined && state.isInitData[localCharacter.id] === process.browser) {
 			return;
 		}
 
