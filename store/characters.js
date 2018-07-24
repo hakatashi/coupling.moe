@@ -5,7 +5,7 @@ const charactersRef = db.collection('characters');
 const couplingsRef = db.collection('couplings');
 
 const localState = () => ({
-	isInitList: false,
+	isInitList: null,
 	list: [],
 	isInitData: {},
 	data: {},

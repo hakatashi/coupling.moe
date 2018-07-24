@@ -4,7 +4,7 @@ import {firebaseAction} from 'vuexfire/out/index.js';
 const couplingsRef = db.collection('couplings');
 
 const localState = () => ({
-	isInitList: false,
+	isInitList: null,
 	list: [],
 	isInitData: {},
 	data: {},

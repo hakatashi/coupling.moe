@@ -5,7 +5,7 @@ import db from '~/lib/db.js';
 const counterRef = db.collection('counter').doc('counter');
 
 export const state = () => ({
-	isInitCounter: false,
+	isInitCounter: null,
 	counter: {
 		value: null,
 	},
