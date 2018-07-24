@@ -21,10 +21,12 @@ module.exports = {
 
 	plugins: [
 		'~/plugins/vuetify',
+		'~/plugins/vue-resize',
 	],
 
 	css: [
 		'vuetify/dist/vuetify.css',
+		'vue-resize/dist/vue-resize.css',
 	],
 
 	head: {

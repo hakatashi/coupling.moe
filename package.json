@@ -6,7 +6,8 @@
   "private": true,
   "dependencies": {
     "@nuxtjs/pwa": "latest",
-    "nuxt": "latest"
+    "nuxt": "latest",
+    "vue-resize": "^0.4.4"
   },
   "scripts": {
     "dev": "nuxt",

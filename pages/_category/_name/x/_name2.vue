@@ -2,8 +2,11 @@
 	<div>
 		<v-progress-linear v-if="isLoading" :style="{margin: 0}" :indeterminate="true"></v-progress-linear>
 		<div class="coupling-name">
-			<div class="coupling-title" :style="{opacity: isLoading ? 0.1 : 1}">
-				{{coupling.names[0]}}
+			<div class="coupling-title" :style="{opacity: isLoading ? 0.1 : 1, height: `${titleScale * 16}px`}">
+				<span ref="title" :style="{transform: `scale(${titleScale})`}">
+					{{coupling.names[0]}}
+					<resize-observer @notify="onResize"/>
+				</span>
 			</div>
 			<div
 				v-if="coupling.names.length > 1"
@@ -76,6 +79,7 @@ export default {
 			isChangeColorDialogShowing: false,
 			themeColors,
 			temporalColor: null,
+			titleScale: 1,
 		};
 	},
 	async fetch({store, params}) {
@@ -125,8 +129,11 @@ export default {
 		]).then(() => {
 			this.isLoading = false;
 		});
+		window.addEventListener('resize', this.resizeTitle);
+		this.resizeTitle();
 	},
 	destroyed() {
+		window.removeEventListener('resize', this.resizeTitle);
 	},
 	methods: {
 		onClickColor(color) {
@@ -140,6 +147,14 @@ export default {
 				this.temporalColor = null;
 			}
 			this.isChangeColorDialogShowing = false;
+		},
+		onResize() {
+			this.resizeTitle();
+		},
+		resizeTitle() {
+			const targetWidth = this.$el.clientWidth * 0.95;
+			const targetScale = Math.min(5, targetWidth / this.$refs.title.clientWidth);
+			this.titleScale = targetScale;
 		}
 	},
 };
@@ -147,13 +162,25 @@ export default {
 
 <style>
 .coupling-title {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
+
 	line-height: 1em;
-	font-size: 56px;
 	font-family: coupling-font;
 	font-weight: 900;
-	color: #444;
 	font-feature-settings: "palt";
+	font-size: 16px;
+
+	color: #444;
+
+	.title {
+		display: inline-block;
+		white-space: nowrap;
+		position: relative;
+	}
 }
 .coupling-name {
 	margin: 1em 0;
