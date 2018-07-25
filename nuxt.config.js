@@ -2,7 +2,13 @@ const firebase = require('./lib/firebase.js');
 const db = firebase.firestore();
 
 module.exports = {
-	build: {},
+	build: {
+		postcss: [
+			require('postcss-import-url')({
+				modernBrowser: true,
+			}),
+		],
+	},
 
 	loading: {color: '#3B8070'},
 
@@ -28,12 +34,6 @@ module.exports = {
 		'vuetify/dist/vuetify.css',
 		'vue-resize/dist/vue-resize.css',
 	],
-
-	head: {
-		link: [
-			{rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
-		],
-	},
 
 	generate: {
 		routes: async () => {

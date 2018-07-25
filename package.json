@@ -6,7 +6,8 @@
   "private": true,
   "dependencies": {
     "@nuxtjs/pwa": "latest",
-    "nuxt": "latest"
+    "nuxt": "latest",
+    "postcss-import-url": "^3.0.4"
   },
   "scripts": {
     "dev": "nuxt",

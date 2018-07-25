@@ -59,6 +59,7 @@ export default {
 </script>
 
 <style>
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 @font-face {
 	font-family: coupling-font;
 	src: url("/NotoSerifCJKjp-Black-subset.woff2") format("woff2"),
