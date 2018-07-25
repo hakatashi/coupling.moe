@@ -106,6 +106,11 @@ export default {
 			}
 		},
 	},
+	head() {
+		return {
+			title: 'トップページ - カップリングデータベース',
+		};
+	},
 };
 </script>
 

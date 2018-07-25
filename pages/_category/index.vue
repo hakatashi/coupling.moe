@@ -57,6 +57,11 @@ export default {
 	},
 	methods: {
 	},
+	head() {
+		return {
+			title: 'キャラクター一覧 - カップリングデータベース',
+		};
+	},
 };
 </script>
 

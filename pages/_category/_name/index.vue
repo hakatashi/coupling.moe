@@ -184,6 +184,11 @@ export default {
 			this.isChangeColorDialogShowing = false;
 		}
 	},
+	head() {
+		return {
+			title: `${this.$route.params.name} - カップリングデータベース`,
+		};
+	},
 };
 </script>
 

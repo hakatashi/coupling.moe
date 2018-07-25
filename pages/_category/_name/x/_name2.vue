@@ -173,6 +173,11 @@ export default {
 			this.titleScale = targetScale;
 		}
 	},
+	head() {
+		return {
+			title: `${this.coupling.names[0]} (${this.$route.params.name}×${this.$route.params.name}) - カップリングデータベース`,
+		};
+	},
 };
 </script>
 
