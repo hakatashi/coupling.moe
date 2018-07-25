@@ -175,7 +175,7 @@ export default {
 	},
 	head() {
 		return {
-			title: `${this.coupling.names[0]} (${this.$route.params.name}×${this.$route.params.name}) - カップリングデータベース`,
+			title: `${this.coupling.names[0]} (${this.$route.params.name}×${this.$route.params.name2}) - カップリングデータベース`,
 		};
 	},
 };
