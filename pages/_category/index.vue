@@ -6,7 +6,7 @@
 				<v-flex v-for="character in characters" :key="character.id" xs12 sm6 md4 lg3 xl2>
 					<v-list-tile nuxt :to="`/${$route.params.category}/${character.name}`">
 						<v-list-tile-avatar>
-							<img :src="character.imageUrl">
+							<img :src="character.imageUrl.replace(/^https:\/\/i\.pximg\.net\/c\/128x128\//, 'https://i-mail.pximg.net/c/360x360_70/')">
 						</v-list-tile-avatar>
 						<v-list-tile-content>
 							<v-list-tile-title>
