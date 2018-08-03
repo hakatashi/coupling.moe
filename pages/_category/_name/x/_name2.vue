@@ -4,7 +4,7 @@
 		<div class="coupling-name">
 			<div class="coupling-title" :style="{opacity: isLoading ? 0.1 : 1, height: `${titleScale * 16}px`}">
 				<span ref="title" :style="{transform: `scale(${titleScale})`}">
-					<input :value="coupling.names[0]" @keyup.enter="updateName" :style="{display: 'block', margin: '0 auto', textAlign: 'center', outline: 'none'}"></input>
+					{{coupling.names[0]}}
 					<resize-observer @notify="onResize"/>
 				</span>
 			</div>
@@ -91,7 +91,6 @@ const charactersRef = db.collection('characters');
 export default {
 	data() {
 		return {
-			id: null,
 			isLoading: true,
 			isChangeColorDialogShowing: false,
 			themeColors,
@@ -143,8 +142,7 @@ export default {
 		this.$store.dispatch('couplings/bindByCharacterNames', [
 			this.$route.params.name,
 			this.$route.params.name2,
-		]).then((id) => {
-			this.id = id;
+		]).then(() => {
 			this.isLoading = false;
 		});
 		window.addEventListener('resize', this.resizeTitle);
@@ -173,14 +171,7 @@ export default {
 			const targetWidth = this.$el.clientWidth * 0.95;
 			const targetScale = Math.min(5, targetWidth / this.$refs.title.clientWidth);
 			this.titleScale = targetScale;
-		},
-		async updateName(event) {
-			const newName = event.target.value;
-			const newNames = this.coupling.names.slice();
-			newNames[0] = newName;
-			await db.collection('couplings').doc(this.id).update({names: newNames});
-			console.log('done');
-		},
+		}
 	},
 	head() {
 		return {
