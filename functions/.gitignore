@@ -1,3 +1,4 @@
-index.js
+*.js
+!*.babel.js
 .runtimeconfig.json
 service-account.json

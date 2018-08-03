@@ -78,6 +78,7 @@ const localActions = {
 		await Promise.all(couplings.docs.map((coupling) => (
 			dispatch('bind', coupling.id)
 		)));
+		return couplings.docs[0].id;
 	},
 };
 

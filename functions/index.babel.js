@@ -1,7 +1,9 @@
 const functions = require('firebase-functions');
 const firebase = require('firebase-admin');
 const {google} = require('googleapis');
-const {promisify, inspect} = require('util');
+const {inspect} = require('util');
+
+const pixpedia = require('./pixpedia.js');
 
 firebase.initializeApp();
 const db = firebase.firestore();
@@ -22,6 +24,24 @@ exports.incrementCounter = functions.pubsub.topic('minute-tick').onPublish(async
 			value: counterTransaction.data().value + 1,
 		});
 	});
+});
+
+exports.updateDescriptions = functions.firestore.document('couplings/{id}').onUpdate(async (change) => {
+	const newValue = change.after.data();
+	const oldValue = change.before.data();
+
+	if (oldValue.names[0] !== newValue.names[0]) {
+		const newName = newValue.names[0];
+		console.log(newName);
+		const pixpediaData = await pixpedia(newName);
+		console.log(pixpediaData);
+		await change.after.ref.update({
+			nicopediaName: newName,
+			pixpediaName: newName,
+			pixpediaDescription: pixpediaData.description,
+			namesSet: Object.assign(...newValue.names.map((name) => ({[name]: true}))),
+		});
+	}
 });
 
 exports.updateImages = functions.pubsub.topic('fifteen-minute-tick').onPublish(async () => {
