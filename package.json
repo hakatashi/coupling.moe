@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "@nuxtjs/pwa": "latest",
+    "mongodb": "^3.1.4",
     "nuxt": "latest",
     "postcss-import-url": "^3.0.4"
   },
@@ -23,6 +24,7 @@
     "eslint": "^5.2.0",
     "eslint-plugin-vue": "^4.7.1",
     "firebase": "^5.3.0",
+    "firebase-admin": "^6.0.0",
     "vue-resize": "^0.4.4",
     "vuetify": "^1.1.8",
     "vuexfire": "hakatashi/vuexfire#3.0.0-alpha.5.hakatashi.1"
