@@ -2,11 +2,16 @@ language: node_js
 node_js:
   - node
 dist: trusty
+services:
+  - mongodb
 sudo: false
 before_install:
   - openssl aes-256-cbc -K $encrypted_695afc2efa18_key -iv $encrypted_695afc2efa18_iv
     -in functions/service-account.json.enc -out functions/service-account.json -d
+  - openssl aes-256-cbc -K $encrypted_695afc2efa18_key -iv $encrypted_695afc2efa18_iv
+    -in bin/service-account.json.enc -out bin/service-account.json -d
 install: npm install
+before_script: node bin/firestore-to-mongo.js
 script:
   - npm run generate
 branches:
