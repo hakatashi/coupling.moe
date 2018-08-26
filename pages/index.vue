@@ -1,14 +1,7 @@
 <template>
 	<section class="container">
 		<div>
-			<logo/>
-			<h1 class="title">
-				NUXT
-			</h1>
-			<h2 class="subtitle">
-				PWA Vue.js Application
-			</h2>
-			<button
+			現在の尊み <button
 				type="button"
 				@click="handleClickButton"
 				class="button--green counter"
@@ -16,21 +9,14 @@
 			>
 				{{counter}}
 			</button>
-			<div :class="['network', online ? 'online' : 'offline']">
-				<div class="circle"/>
-				{{online ? 'online' : 'offline'}}
-			</div>
 			<div class="links">
-				<a
-					href="https://nuxtjs.org/"
-					target="_blank"
+				<nuxt-link
+					to="/imas346/"
 					class="button--green"
-					rel="noopener">Documentation</a>
-				<a
-					href="https://github.com/nuxt/nuxt.js"
-					target="_blank"
-					class="button--grey"
-					rel="noopener">GitHub</a>
+					rel="noopener"
+				>
+					デレマス キャラ一覧
+				</nuxt-link>
 			</div>
 		</div>
 	</section>
@@ -115,4 +101,7 @@ export default {
 </script>
 
 <style>
+.links {
+	margin-top: 1em;
+}
 </style>

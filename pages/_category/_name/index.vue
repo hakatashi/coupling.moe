@@ -81,7 +81,7 @@
 			<v-list>
 				<v-layout row wrap>
 					<v-flex v-for="coupling in couplings" :key="coupling.id" xs12 sm6 md6 lg4 xl3>
-						<v-list-tile nuxt :to="`/${$route.params.category}/${coupling.originalCharacter1.name}/x/${coupling.originalCharacter2.name}`">
+						<v-list-tile nuxt :to="`/${$route.params.category}/${coupling.originalCharacter1.name}/x/${coupling.originalCharacter2.name}/`">
 							<v-list-tile-avatar>
 								<img :src="coupling.imageUrls[0] && coupling.imageUrls[0].replace(/^https:\/\/i\.pximg\.net\/c\/128x128\//, 'https://i-mail.pximg.net/c/360x360_70/')">
 							</v-list-tile-avatar>
