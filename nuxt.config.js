@@ -8,6 +8,15 @@ module.exports = {
 				modernBrowser: true,
 			}),
 		],
+		extend(config) {
+			config.node = {
+				fs: 'empty',
+				dns: 'empty',
+				module: 'empty',
+				net: 'empty',
+				tls: 'empty',
+			};
+		},
 	},
 
 	loading: {color: '#3B8070'},

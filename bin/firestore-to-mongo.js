@@ -3,8 +3,6 @@
 const serviceAccount = require('./service-account.json');
 const firebase = require('firebase-admin');
 const {MongoClient} = require('mongodb');
-const fs = require('fs');
-const {promisify} = require('util');
 
 require('firebase/firestore');
 

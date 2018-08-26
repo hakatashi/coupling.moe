@@ -1,4 +1,4 @@
-import {firebaseAction, firebaseMutations} from 'vuexfire/out/index.js';
+import {firebaseAction, firebaseMutations} from '~/lib/vuexfire.js';
 import firebase from '~/lib/firebase.js';
 import db from '~/lib/db.js';
 

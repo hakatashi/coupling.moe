@@ -1,5 +1,5 @@
 import db from '~/lib/db.js';
-import {firebaseAction} from 'vuexfire/out/index.js';
+import {firebaseAction} from '~/lib/vuexfire.js';
 
 const charactersRef = db.collection('characters');
 const couplingsRef = db.collection('couplings');
