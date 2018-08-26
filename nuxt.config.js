@@ -45,6 +45,10 @@ module.exports = {
 	],
 
 	generate: {
+		minify: {
+			minifyCSS: false,
+			minifyJS: false,
+		},
 		routes: async () => {
 			const characters = await db.collection('characters').get();
 			const couplings = await db.collection('couplings').get();
@@ -61,5 +65,6 @@ module.exports = {
 				}),
 			];
 		},
+		concurrency: 50,
 	},
 };
