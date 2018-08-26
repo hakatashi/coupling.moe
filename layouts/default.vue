@@ -2,21 +2,17 @@
 	<v-app>
 		<v-navigation-drawer v-model="drawer" app>
 			<v-list	>
-				<v-list-tile>
+				<v-list-tile to="/" nuxt>
 					<v-list-tile-content>
 						<v-list-tile-title>
-							<nuxt-link to="/">
-								トップページ
-							</nuxt-link>
+							トップページ
 						</v-list-tile-title>
 					</v-list-tile-content>
 				</v-list-tile>
-				<v-list-tile>
+				<v-list-tile to="/imas346/" nuxt>
 					<v-list-tile-content>
 						<v-list-tile-title>
-							<nuxt-link to="/imas346/">
-								キャラクター
-							</nuxt-link>
+							キャラクター
 						</v-list-tile-title>
 					</v-list-tile-content>
 				</v-list-tile>
