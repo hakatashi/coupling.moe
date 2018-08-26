@@ -23,13 +23,13 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue';
+import TreeMap from '~/components/TreeMap.vue';
 import {mapGetters} from 'vuex';
 import firebase from '~/lib/firebase.js';
 import db from '~/lib/db.js';
 
 export default {
-	components: {Logo},
+	components: {TreeMap},
 	async fetch({store}) {
 		if (!process.browser) {
 			await store.dispatch('init');
