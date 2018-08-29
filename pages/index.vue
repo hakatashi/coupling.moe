@@ -23,13 +23,11 @@
 </template>
 
 <script>
-import TreeMap from '~/components/TreeMap.vue';
 import db from '~/lib/db.js';
 import firebase from '~/lib/firebase.js';
 import {mapGetters} from 'vuex';
 
 export default {
-	components: {TreeMap},
 	async fetch({store}) {
 		if (!process.browser) {
 			await store.dispatch('init');

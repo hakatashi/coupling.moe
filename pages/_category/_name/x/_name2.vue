@@ -30,7 +30,8 @@
 		</div>
 		<div
 			:style="{opacity: isLoading ? 0.1 : 1, display: 'flex', flexDirection: 'row', justifyContent: 'center'}"
-			class="display-1 text-xs-center">
+			class="display-1 text-xs-center"
+		>
 			<nuxt-link
 				:to="`/imas346/${character1.name}/`"
 				:style="{
@@ -51,44 +52,30 @@
 				{{character2.name}}
 			</nuxt-link>
 		</div>
-		<v-container
-			grid-list-sm
-			text-xs-center
-			wrap>
+		<v-container grid-list-sm text-xs-center wrap>
 			<v-subheader>
 				{{coupling ? coupling.pixpediaDescription : ''}}
 			</v-subheader>
-			<v-layout>
-				<v-flex>
-					<v-card>
-						<v-container
-							grid-list-xs
-							fluid>
-							<v-layout
-								row
-								wrap>
-								<v-flex
-									v-for="image in coupling ? coupling.images : []"
-									v-if="coupling"
-									:key="image.id"
-									xs4
-								>
-									<v-card
-										:href="image.image && image.image.contextLink"
-										target="_blank"
-										flat
-										tile
-										nuxt
-									>
-										<v-card-media
-											v-if="typeof image.link === 'string'"
-											:src="image.link"
-											height="150px"
-										/>
-									</v-card>
-								</v-flex>
-							</v-layout>
-						</v-container>
+			<tree-map :images="coupling ? coupling.images.slice(0, 5) : []"/>
+			<v-layout row wrap>
+				<v-flex
+					v-for="image in coupling ? coupling.images : []"
+					v-if="coupling"
+					:key="image.id"
+					xs4
+				>
+					<v-card
+						:href="image.image && image.image.contextLink"
+						target="_blank"
+						flat
+						tile
+						nuxt
+					>
+						<v-card-media
+							v-if="typeof image.link === 'string'"
+							:src="image.link"
+							height="150px"
+						/>
 					</v-card>
 				</v-flex>
 			</v-layout>
@@ -97,7 +84,10 @@
 </template>
 
 <script>
+import TreeMap from '~/components/TreeMap.vue';
+
 export default {
+	components: {TreeMap},
 	data() {
 		return {
 			isLoading: true,
@@ -108,20 +98,16 @@ export default {
 	},
 	async fetch({store, params}) {
 		if (!process.browser) {
-			await store.dispatch('couplings/bindByCharacterNames', [
-				params.name,
-				params.name2,
-			]);
+			await store.dispatch('couplings/bindByCharacterNames', [params.name, params.name2]);
 		}
 	},
 	computed: {
 		coupling() {
-			return this.$store.getters['couplings/getByCharacterNames']([
-				this.$route.params.name,
-				this.$route.params.name2,
-			])[0] || {
-				names: [`${this.$route.params.name}×${this.$route.params.name2}`],
-			};
+			return (
+				this.$store.getters['couplings/getByCharacterNames']([this.$route.params.name, this.$route.params.name2])[0] || {
+					names: [`${this.$route.params.name}×${this.$route.params.name2}`],
+				}
+			);
 		},
 		character1() {
 			if (this.coupling && this.coupling.character1 && this.coupling.character1.id) {
@@ -145,10 +131,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.$store.dispatch('couplings/bindByCharacterNames', [
-			this.$route.params.name,
-			this.$route.params.name2,
-		]).then(() => {
+		this.$store.dispatch('couplings/bindByCharacterNames', [this.$route.params.name, this.$route.params.name2]).then(() => {
 			this.isLoading = false;
 		});
 		window.addEventListener('resize', this.resizeTitle);
@@ -186,7 +169,7 @@ export default {
 	line-height: 1em;
 	font-family: coupling-font;
 	font-weight: 900;
-	font-feature-settings: "palt";
+	font-feature-settings: 'palt';
 	font-size: 16px;
 
 	color: #444;
