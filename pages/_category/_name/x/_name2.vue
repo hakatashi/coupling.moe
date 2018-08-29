@@ -56,10 +56,10 @@
 			{{coupling ? coupling.pixpediaDescription : ''}}
 		</v-subheader>
 		<div :style="{display: 'flex', justifyContent: 'center'}">
-			<tree-map :images="coupling ? coupling.images.slice(0, 5) : []"/>
+			<tree-map :images="coupling ? coupling.images.slice(0, 5).filter(({image}) => image) : []"/>
 		</div>
 		<div :style="{display: 'flex', justifyContent: 'center'}">
-			<tree-map :images="coupling ? coupling.images.slice(5, 10) : []"/>
+			<tree-map :images="coupling ? coupling.images.slice(5, 10).filter(({image}) => image) : []"/>
 		</div>
 	</div>
 </template>

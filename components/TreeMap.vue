@@ -1,5 +1,6 @@
 <template>
 	<tree-map-component
+		v-if="images.length !== 0"
 		:tree="tree"
 		:column="isColumnFirst"
 		width="100vw"
@@ -9,6 +10,7 @@
 
 <script>
 import TreeMapComponent from '~/components/TreeMapComponent.vue';
+import assert from 'assert';
 import get from 'lodash/get';
 import initial from 'lodash/initial';
 import last from 'lodash/last';
@@ -20,6 +22,8 @@ import sumBy from 'lodash/sumBy';
 const deepClone = (d) => JSON.parse(JSON.stringify(d));
 
 const generateTrees = (leaves) => {
+	assert(leaves.length !== 0);
+
 	if (leaves.length === 1) {
 		return [[leaves[0]]];
 	}
@@ -118,6 +122,10 @@ export default {
 	},
 	methods: {
 		regenerateLayout(images) {
+			if (images.length === 0) {
+				return;
+			}
+
 			const {tree, isColumnFirst} = findLayout(
 				images.map(({image, link}) => ({
 					link,
