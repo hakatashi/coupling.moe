@@ -130,8 +130,6 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
-import firebase from '~/lib/firebase.js';
 import db from '~/lib/db.js';
 import {themeColors} from '~/lib/constants.js';
 
@@ -183,20 +181,16 @@ export default {
 			return this.temporalColor;
 		},
 	},
-	created() {
-	},
 	mounted() {
 		this.$store.dispatch('characters/bindByName', this.$route.params.name).then(() => {
 			this.isLoading = false;
 		});
 	},
-	destroyed() {
-	},
 	methods: {
 		onClickColor(color) {
 			this.temporalColor = color;
 		},
-		async onClickChangeColor() {
+		onClickChangeColor() {
 			if (this.temporalColor !== null) {
 				charactersRef.doc(this.character.id).update({
 					color: this.temporalColor,

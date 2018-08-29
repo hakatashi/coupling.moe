@@ -39,7 +39,6 @@
 
 <script>
 import {mapState} from 'vuex';
-import firebase from '~/lib/firebase.js';
 
 export default {
 	data() {
@@ -65,12 +64,8 @@ export default {
 			},
 		}),
 	},
-	created() {
-	},
 	mounted() {
 		this.$store.dispatch('characters/initList');
-	},
-	destroyed() {
 	},
 	methods: {
 	},

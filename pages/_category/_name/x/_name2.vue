@@ -97,19 +97,11 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
-import firebase from '~/lib/firebase.js';
-import db from '~/lib/db.js';
-import {themeColors} from '~/lib/constants.js';
-
-const charactersRef = db.collection('characters');
-
 export default {
 	data() {
 		return {
 			isLoading: true,
 			isChangeColorDialogShowing: false,
-			themeColors,
 			temporalColor: null,
 			titleScale: 1,
 		};
@@ -152,8 +144,6 @@ export default {
 			};
 		},
 	},
-	created() {
-	},
 	mounted() {
 		this.$store.dispatch('couplings/bindByCharacterNames', [
 			this.$route.params.name,
@@ -168,18 +158,6 @@ export default {
 		window.removeEventListener('resize', this.resizeTitle);
 	},
 	methods: {
-		onClickColor(color) {
-			this.temporalColor = color;
-		},
-		async onClickChangeColor() {
-			if (this.temporalColor !== null) {
-				charactersRef.doc(this.character.id).update({
-					color: this.temporalColor,
-				});
-				this.temporalColor = null;
-			}
-			this.isChangeColorDialogShowing = false;
-		},
 		onResize() {
 			this.resizeTitle();
 		},

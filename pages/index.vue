@@ -24,9 +24,9 @@
 
 <script>
 import TreeMap from '~/components/TreeMap.vue';
-import {mapGetters} from 'vuex';
-import firebase from '~/lib/firebase.js';
 import db from '~/lib/db.js';
+import firebase from '~/lib/firebase.js';
+import {mapGetters} from 'vuex';
 
 export default {
 	components: {TreeMap},

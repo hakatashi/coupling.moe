@@ -3,9 +3,9 @@
 </template>
 
 <script>
+import get from 'lodash/get';
 import initial from 'lodash/initial';
 import last from 'lodash/last';
-import get from 'lodash/get';
 import set from 'lodash/set';
 
 const deepClone = (d) => JSON.parse(JSON.stringify(d));
