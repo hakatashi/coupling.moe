@@ -2,10 +2,10 @@
 	<section class="container">
 		<div>
 			現在の尊み <button
-				type="button"
-				@click="handleClickButton"
-				class="button--green counter"
 				:disabled="!online"
+				type="button"
+				class="button--green counter"
+				@click="handleClickButton"
 			>
 				{{counter}}
 			</button>
@@ -88,7 +88,7 @@ export default {
 
 				this.messaging.onMessage((payload) => {
 					console.log('onMessage:', payload);
-				})
+				});
 			}
 		},
 	},

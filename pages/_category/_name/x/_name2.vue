@@ -1,17 +1,24 @@
 <template>
 	<div>
-		<v-progress-linear v-if="isLoading" :style="{margin: 0}" :indeterminate="true"></v-progress-linear>
+		<v-progress-linear
+			v-if="isLoading"
+			:style="{margin: 0}"
+			:indeterminate="true"/>
 		<div class="coupling-name">
-			<div class="coupling-title" :style="{opacity: isLoading ? 0.1 : 1, height: `${titleScale * 16}px`}">
-				<span ref="title" :style="{transform: `scale(${titleScale})`}">
+			<div
+				:style="{opacity: isLoading ? 0.1 : 1, height: `${titleScale * 16}px`}"
+				class="coupling-title">
+				<span
+					ref="title"
+					:style="{transform: `scale(${titleScale})`}">
 					{{coupling.names[0]}}
 					<resize-observer @notify="onResize"/>
 				</span>
 			</div>
 			<div
 				v-if="coupling.names.length > 1"
-				class="coupling-subnames"
 				:style="{opacity: isLoading ? 0.1 : 1, textAlign: 'center'}"
+				class="coupling-subnames"
 			>
 				<span
 					v-for="name in coupling.names.slice(1)"
@@ -21,7 +28,9 @@
 				</span>
 			</div>
 		</div>
-		<div class="display-1 text-xs-center" :style="{opacity: isLoading ? 0.1 : 1, display: 'flex', flexDirection: 'row', justifyContent: 'center'}">
+		<div
+			:style="{opacity: isLoading ? 0.1 : 1, display: 'flex', flexDirection: 'row', justifyContent: 'center'}"
+			class="display-1 text-xs-center">
 			<nuxt-link
 				:to="`/imas346/${character1.name}/`"
 				:style="{
@@ -42,18 +51,25 @@
 				{{character2.name}}
 			</nuxt-link>
 		</div>
-		<v-container grid-list-sm text-xs-center wrap>
+		<v-container
+			grid-list-sm
+			text-xs-center
+			wrap>
 			<v-subheader>
 				{{coupling ? coupling.pixpediaDescription : ''}}
 			</v-subheader>
 			<v-layout>
 				<v-flex>
 					<v-card>
-						<v-container grid-list-xs fluid>
-							<v-layout row wrap>
+						<v-container
+							grid-list-xs
+							fluid>
+							<v-layout
+								row
+								wrap>
 								<v-flex
-									v-if="coupling"
 									v-for="image in coupling ? coupling.images : []"
+									v-if="coupling"
 									:key="image.id"
 									xs4
 								>
@@ -68,7 +84,7 @@
 											v-if="typeof image.link === 'string'"
 											:src="image.link"
 											height="150px"
-										></v-card-media>
+										/>
 									</v-card>
 								</v-flex>
 							</v-layout>

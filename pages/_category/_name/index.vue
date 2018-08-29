@@ -1,6 +1,8 @@
 <template>
 	<div>
-		<div class="character-header" :style="{backgroundColor: character ? character.color : 'grey'}">
+		<div
+			:style="{backgroundColor: character ? character.color : 'grey'}"
+			class="character-header">
 			<div class="display-3 white--text">
 				{{character ? character.name : $route.params.name}}
 			</div>
@@ -40,25 +42,25 @@
 							<div
 								v-for="color in themeColors"
 								:key="color"
-								class="color"
 								:style="{
 									backgroundColor: color,
 								}"
+								class="color"
 								@click="onClickColor(color)"
 							>
 								<div
-									v-if="selectedColor === color" class="circle"
+									v-if="selectedColor === color"
 									:style="{
 										borderColor: color,
 									}"
-								>
-								</div>
+									class="circle"
+								/>
 							</div>
 						</div>
 					</v-card-text>
-					<v-divider></v-divider>
+					<v-divider/>
 					<v-card-actions>
-						<v-spacer></v-spacer>
+						<v-spacer/>
 						<v-btn
 							color="primary"
 							flat
@@ -69,19 +71,39 @@
 					</v-card-actions>
 				</v-card>
 			</v-dialog>
-			<v-avatar class="character-avatar" size="128" color="grey">
+			<v-avatar
+				class="character-avatar"
+				size="128"
+				color="grey">
 				<img :src="character && character.imageUrl.replace(/^https:\/\/i\.pximg\.net\/c\/128x128\//, 'https://i-mail.pximg.net/c/360x360_70/')">
 			</v-avatar>
 		</div>
-		<v-container grid-list-sm text-xs-center wrap>
+		<v-container
+			grid-list-sm
+			text-xs-center
+			wrap>
 			<v-subheader>
 				{{character ? character.name : $route.params.name}}のカップリング一覧
 			</v-subheader>
-			<v-progress-linear v-if="isLoading" :style="{margin: 0}" :indeterminate="true"></v-progress-linear>
+			<v-progress-linear
+				v-if="isLoading"
+				:style="{margin: 0}"
+				:indeterminate="true"/>
 			<v-list>
-				<v-layout row wrap>
-					<v-flex v-for="coupling in couplings" :key="coupling.id" xs12 sm6 md6 lg4 xl3>
-						<v-list-tile nuxt :to="`/${$route.params.category}/${coupling.originalCharacter1.name}/x/${coupling.originalCharacter2.name}/`">
+				<v-layout
+					row
+					wrap>
+					<v-flex
+						v-for="coupling in couplings"
+						:key="coupling.id"
+						xs12
+						sm6
+						md6
+						lg4
+						xl3>
+						<v-list-tile
+							:to="`/${$route.params.category}/${coupling.originalCharacter1.name}/x/${coupling.originalCharacter2.name}/`"
+							nuxt>
 							<v-list-tile-avatar>
 								<img :src="coupling.imageUrls[0] && coupling.imageUrls[0].replace(/^https:\/\/i\.pximg\.net\/c\/128x128\//, 'https://i-mail.pximg.net/c/360x360_70/')">
 							</v-list-tile-avatar>
@@ -182,7 +204,7 @@ export default {
 				this.temporalColor = null;
 			}
 			this.isChangeColorDialogShowing = false;
-		}
+		},
 	},
 	head() {
 		return {

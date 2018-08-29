@@ -1,15 +1,21 @@
 <template>
 	<v-app>
-		<v-navigation-drawer v-model="drawer" app>
+		<v-navigation-drawer
+			v-model="drawer"
+			app>
 			<v-list	>
-				<v-list-tile to="/" nuxt>
+				<v-list-tile
+					to="/"
+					nuxt>
 					<v-list-tile-content>
 						<v-list-tile-title>
 							トップページ
 						</v-list-tile-title>
 					</v-list-tile-content>
 				</v-list-tile>
-				<v-list-tile to="/imas346/" nuxt>
+				<v-list-tile
+					to="/imas346/"
+					nuxt>
 					<v-list-tile-content>
 						<v-list-tile-title>
 							キャラクター
@@ -18,10 +24,15 @@
 				</v-list-tile>
 			</v-list>
 		</v-navigation-drawer>
-		<v-toolbar app dark color="cyan">
-			<v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+		<v-toolbar
+			app
+			dark
+			color="cyan">
+			<v-toolbar-side-icon @click.stop="drawer = !drawer"/>
 			<v-toolbar-title>
-				<nuxt-link to="/" class="white--text">
+				<nuxt-link
+					to="/"
+					class="white--text">
 					カップリングデータベース
 				</nuxt-link>
 			</v-toolbar-title>
@@ -34,9 +45,13 @@
 				text-xs-center
 				xs12
 			>
-				このサイトは開発中です - <a href="https://github.com/hakatashi/coupling.moe" target="_blank">
+				このサイトは開発中です - <a
+					href="https://github.com/hakatashi/coupling.moe"
+					target="_blank">
 					GitHub
-				</a> - <a href="https://twitter.com/hakatashi" target="_blank">
+				</a> - <a
+					href="https://twitter.com/hakatashi"
+					target="_blank">
 					開発者Twitter
 				</a>
 			</v-flex>
@@ -51,7 +66,7 @@ export default {
 			drawer: false,
 		};
 	},
-}
+};
 </script>
 
 <style>
