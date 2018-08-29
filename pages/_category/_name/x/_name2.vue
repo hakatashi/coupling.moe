@@ -52,34 +52,15 @@
 				{{character2.name}}
 			</nuxt-link>
 		</div>
-		<v-container grid-list-sm text-xs-center wrap>
-			<v-subheader>
-				{{coupling ? coupling.pixpediaDescription : ''}}
-			</v-subheader>
+		<v-subheader>
+			{{coupling ? coupling.pixpediaDescription : ''}}
+		</v-subheader>
+		<div :style="{display: 'flex', justifyContent: 'center'}">
 			<tree-map :images="coupling ? coupling.images.slice(0, 5) : []"/>
-			<v-layout row wrap>
-				<v-flex
-					v-for="image in coupling ? coupling.images : []"
-					v-if="coupling"
-					:key="image.id"
-					xs4
-				>
-					<v-card
-						:href="image.image && image.image.contextLink"
-						target="_blank"
-						flat
-						tile
-						nuxt
-					>
-						<v-card-media
-							v-if="typeof image.link === 'string'"
-							:src="image.link"
-							height="150px"
-						/>
-					</v-card>
-				</v-flex>
-			</v-layout>
-		</v-container>
+		</div>
+		<div :style="{display: 'flex', justifyContent: 'center'}">
+			<tree-map :images="coupling ? coupling.images.slice(5, 10) : []"/>
+		</div>
 	</div>
 </template>
 

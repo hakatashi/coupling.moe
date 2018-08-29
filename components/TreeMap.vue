@@ -1,8 +1,14 @@
 <template>
-	<div/>
+	<tree-map-component
+		:tree="tree"
+		:column="isColumnFirst"
+		width="100vw"
+		height="40vw"
+	/>
 </template>
 
 <script>
+import TreeMapComponent from '~/components/TreeMapComponent.vue';
 import get from 'lodash/get';
 import initial from 'lodash/initial';
 import last from 'lodash/last';
@@ -56,10 +62,10 @@ const getTreeRatio = (images, tree, isColumn) => {
 	});
 
 	if (isColumn) {
-		return sum(newRatios);
+		return 1 / sumBy(newRatios, (ratio) => 1 / ratio);
 	}
 
-	return 1 / sumBy(newRatios, (ratio) => 1 / ratio);
+	return sum(newRatios);
 };
 
 const findLayout = (images, targetRatio) => {
@@ -89,6 +95,7 @@ const findLayout = (images, targetRatio) => {
 };
 
 export default {
+	components: {TreeMapComponent},
 	props: {
 		images: {
 			required: true,
@@ -97,7 +104,8 @@ export default {
 	},
 	data() {
 		return {
-			layout: [],
+			tree: [],
+			isColumnFirst: true,
 		};
 	},
 	watch: {
@@ -110,13 +118,16 @@ export default {
 	},
 	methods: {
 		regenerateLayout(images) {
-			this.layout = findLayout(
+			const {tree, isColumnFirst} = findLayout(
 				images.map(({image, link}) => ({
 					link,
+					contextLink: image.contextLink,
 					ratio: Math.max(1 / 3, Math.min(image.width / image.height, 3)),
 				})),
-				3
+				2.5
 			);
+			this.tree = tree;
+			this.isColumnFirst = isColumnFirst;
 		},
 	},
 };
