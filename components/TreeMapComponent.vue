@@ -1,14 +1,14 @@
 <template>
 	<div
 		:style="{width, height}"
-		:class="{column}"
+		:class="[className, {column}]"
 		class="tree-map-component"
 	>
 		<div
 			v-for="(item, index) in normalizedTree"
 			:key="index"
 			:style="{
-				flexGrow: item.ratio,
+				flexGrow: item.ratio * 100,
 			}"
 			:class="{leaf: !Array.isArray(item.tree)}"
 			class="tree-map-component-item"
@@ -61,6 +61,10 @@ export default {
 			default: '',
 		},
 		height: {
+			type: String,
+			default: '',
+		},
+		className: {
 			type: String,
 			default: '',
 		},

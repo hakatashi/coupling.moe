@@ -1,11 +1,13 @@
 <template>
-	<tree-map-component
-		v-if="images.length !== 0"
-		:tree="tree"
-		:column="isColumnFirst"
-		width="100vw"
-		height="40vw"
-	/>
+	<div class="tree-map">
+		<tree-map-component
+			v-if="images.length !== 0"
+			:tree="tree"
+			:column="isColumnFirst"
+			width="100%"
+			height="100%"
+		/>
+	</div>
 </template>
 
 <script>

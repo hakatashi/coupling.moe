@@ -1,10 +1,13 @@
+const precss = require('precss');
+const importUrl = require('postcss-import-url');
 const firebase = require('./lib/firebase.js');
 const db = firebase.firestore();
 
 module.exports = {
 	build: {
 		postcss: [
-			require('postcss-import-url')({
+			precss(),
+			importUrl({
 				modernBrowser: true,
 			}),
 		],
@@ -34,15 +37,9 @@ module.exports = {
 		VAPID_KEY: 'BNwKlUsy_JXMtIFPCH2PCcZ213I6QZJt27ZwiqhKzNf-f0XeYQDdfGE165x3M49fEaMAH-B9Z0oQhK4gCI_R68o',
 	},
 
-	plugins: [
-		'~/plugins/vuetify',
-		'~/plugins/vue-resize',
-	],
+	plugins: ['~/plugins/vuetify', '~/plugins/vue-resize'],
 
-	css: [
-		'vuetify/dist/vuetify.css',
-		'vue-resize/dist/vue-resize.css',
-	],
+	css: ['vuetify/dist/vuetify.css', 'vue-resize/dist/vue-resize.css'],
 
 	generate: {
 		minify: {
@@ -55,9 +52,7 @@ module.exports = {
 			return [
 				'/',
 				'/imas346/',
-				...characters.docs.map((character) => (
-					`/imas346/${character.get('name')}`
-				)),
+				...characters.docs.map((character) => `/imas346/${character.get('name')}`),
 				...couplings.docs.map((coupling) => {
 					const character1 = characters.docs.find((character) => character.id === coupling.get('character1').id);
 					const character2 = characters.docs.find((character) => character.id === coupling.get('character2').id);

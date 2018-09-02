@@ -55,10 +55,8 @@
 		<v-subheader>
 			{{coupling ? coupling.pixpediaDescription : ''}}
 		</v-subheader>
-		<div :style="{display: 'flex', justifyContent: 'center'}">
+		<div class="tree-maps">
 			<tree-map :images="coupling ? coupling.images.slice(0, 5).filter(({image}) => image) : []"/>
-		</div>
-		<div :style="{display: 'flex', justifyContent: 'center'}">
 			<tree-map :images="coupling ? coupling.images.slice(5, 10).filter(({image}) => image) : []"/>
 		</div>
 	</div>
@@ -163,5 +161,24 @@ export default {
 }
 .coupling-name {
 	margin: 1em 0;
+}
+.tree-maps {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+
+	@media (min-width: 720px) {
+		flex-direction: row;
+	}
+
+	.tree-map {
+		width: 100vw;
+		height: 40vw;
+
+		@media (min-width: 720px) {
+			width: 50vw;
+			height: 20vw;
+		}
+	}
 }
 </style>

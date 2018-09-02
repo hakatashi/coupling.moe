@@ -6,7 +6,8 @@
   "private": true,
   "dependencies": {
     "@nuxtjs/pwa": "latest",
-    "nuxt": "latest"
+    "nuxt": "latest",
+    "precss": "^3.1.2"
   },
   "scripts": {
     "dev": "nuxt",
