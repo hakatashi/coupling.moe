@@ -1,7 +1,7 @@
 <template>
 	<v-app>
 		<v-navigation-drawer v-model="drawer" app>
-			<v-list	>
+			<v-list>
 				<v-list-tile to="/" nuxt>
 					<v-list-tile-content>
 						<v-list-tile-title>
@@ -38,11 +38,13 @@
 			<v-flex text-xs-center xs12>
 				このサイトは開発中です - <a
 					href="https://github.com/hakatashi/coupling.moe"
-					target="_blank">
+					target="_blank"
+				>
 					GitHub
 				</a> - <a
 					href="https://twitter.com/hakatashi"
-					target="_blank">
+					target="_blank"
+				>
 					開発者Twitter
 				</a>
 			</v-flex>

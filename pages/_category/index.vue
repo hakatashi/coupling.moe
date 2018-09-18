@@ -2,15 +2,18 @@
 	<v-container
 		grid-list-sm
 		text-xs-center
-		wrap>
+		wrap
+	>
 		<v-progress-linear
 			v-if="isLoading"
 			:style="{margin: 0}"
-			:indeterminate="true"/>
+			:indeterminate="true"
+		/>
 		<v-list>
 			<v-layout
 				row
-				wrap>
+				wrap
+			>
 				<v-flex
 					v-for="character in characters"
 					:key="character.id"
@@ -18,10 +21,12 @@
 					sm6
 					md4
 					lg3
-					xl2>
+					xl2
+				>
 					<v-list-tile
 						:to="`/${$route.params.category}/${character.name}/`"
-						nuxt>
+						nuxt
+					>
 						<v-list-tile-avatar>
 							<img :src="character.imageUrl.replace(/^https:\/\/i\.pximg\.net\/c\/128x128\//, 'https://i-mail.pximg.net/c/360x360_70/')">
 						</v-list-tile-avatar>

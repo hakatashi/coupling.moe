@@ -3,14 +3,17 @@
 		<v-progress-linear
 			v-if="isLoading"
 			:style="{margin: 0}"
-			:indeterminate="true"/>
+			:indeterminate="true"
+		/>
 		<div class="coupling-name">
 			<div
 				:style="{opacity: isLoading ? 0.1 : 1, height: `${titleScale * 16}px`}"
-				class="coupling-title">
+				class="coupling-title"
+			>
 				<span
 					ref="title"
-					:style="{transform: `scale(${titleScale})`}">
+					:style="{transform: `scale(${titleScale})`}"
+				>
 					{{coupling.names[0]}}
 					<resize-observer @notify="onResize"/>
 				</span>

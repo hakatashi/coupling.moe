@@ -2,7 +2,8 @@
 	<div>
 		<div
 			:style="{backgroundColor: character ? character.color : 'grey'}"
-			class="character-header">
+			class="character-header"
+		>
 			<div class="display-3 white--text">
 				{{character ? character.name : $route.params.name}}
 			</div>
@@ -74,25 +75,29 @@
 			<v-avatar
 				class="character-avatar"
 				size="128"
-				color="grey">
+				color="grey"
+			>
 				<img :src="character && character.imageUrl.replace(/^https:\/\/i\.pximg\.net\/c\/128x128\//, 'https://i-mail.pximg.net/c/360x360_70/')">
 			</v-avatar>
 		</div>
 		<v-container
 			grid-list-sm
 			text-xs-center
-			wrap>
+			wrap
+		>
 			<v-subheader>
 				{{character ? character.name : $route.params.name}}のカップリング一覧
 			</v-subheader>
 			<v-progress-linear
 				v-if="isLoading"
 				:style="{margin: 0}"
-				:indeterminate="true"/>
+				:indeterminate="true"
+			/>
 			<v-list>
 				<v-layout
 					row
-					wrap>
+					wrap
+				>
 					<v-flex
 						v-for="coupling in couplings"
 						:key="coupling.id"
@@ -100,10 +105,12 @@
 						sm6
 						md6
 						lg4
-						xl3>
+						xl3
+					>
 						<v-list-tile
 							:to="`/${$route.params.category}/${coupling.originalCharacter1.name}/x/${coupling.originalCharacter2.name}/`"
-							nuxt>
+							nuxt
+						>
 							<v-list-tile-avatar>
 								<img :src="coupling.imageUrls[0] && coupling.imageUrls[0].replace(/^https:\/\/i\.pximg\.net\/c\/128x128\//, 'https://i-mail.pximg.net/c/360x360_70/')">
 							</v-list-tile-avatar>
