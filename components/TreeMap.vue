@@ -21,6 +21,7 @@ import set from 'lodash/set';
 import sum from 'lodash/sum';
 import sumBy from 'lodash/sumBy';
 
+// This WAS actually faster than Immutable.js 😏
 const deepClone = (d) => JSON.parse(JSON.stringify(d));
 
 const generateTrees = (leaves) => {
