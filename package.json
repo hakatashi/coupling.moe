@@ -1,6 +1,9 @@
 {
   "name": "coupling.moe",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=10.3.0"
+  },
   "description": "カップリングデータベース",
   "author": "Koki Takahashi <hakatasiloving@gmail.com>",
   "private": true,
