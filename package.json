@@ -7,6 +7,10 @@
   "description": "カップリングデータベース",
   "author": "Koki Takahashi <hakatasiloving@gmail.com>",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hakatashi/coupling.moe.git"
+  },
   "dependencies": {
     "@nuxtjs/pwa": "latest",
     "nuxt": "latest",
