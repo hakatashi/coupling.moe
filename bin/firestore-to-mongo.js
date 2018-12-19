@@ -38,32 +38,48 @@ const traverse = (object, mapper) => {
 
 	const collections = await db.getCollections();
 	for (const collection of collections) {
-		console.log(`Exporting ${collection.id}...`);
-
-		const docs = await collection.get();
+		if (collection.id === 'images') {
+			continue;
+		}
 
 		console.log(`Importing ${collection.id}...`);
 		await mongo.createCollection(collection.id);
 		await mongo.collection(collection.id).deleteMany({});
-		const records = [];
 
-		// eslint-disable-next-line mysticatea/prefer-for-of
-		docs.forEach((doc) => {
-			const data = {
-				...traverse(doc.data(), (value) => {
-					if (value instanceof firebase.firestore.DocumentReference) {
-						return {
-							__ref: value._referencePath.segments,
-						};
-					}
-					return value;
-				}),
-				_id: doc.id,
-			};
-			records.push(data);
-		});
+		let count = Infinity;
+		let offset = '';
 
-		await mongo.collection(collection.id).insertMany(records, {ordered: false});
+		do {
+			console.log(`Exporting ${collection.id} (offset = ${JSON.stringify(offset)})...`);
+			const records = [];
+
+			const docs = collection.id === 'images' ? (await collection.where('link', '>', offset).orderBy('link').limit(1000).get()) : (await collection.get());
+
+			// eslint-disable-next-line mysticatea/prefer-for-of
+			docs.forEach((doc) => {
+				const data = {
+					...traverse(doc.data(), (value) => {
+						if (value instanceof firebase.firestore.DocumentReference) {
+							return {
+								__ref: value._path.segments,
+							};
+						}
+						return value;
+					}),
+					_id: doc.id,
+				};
+				records.push(data);
+			});
+
+			if (records.length > 0) {
+				await mongo.collection(collection.id).insertMany(records, {ordered: false});
+			}
+
+			count = docs.size;
+			if (docs.size > 0) {
+				offset = docs.docs[docs.size - 1].get('link');
+			}
+		} while (count > 0 && collection.id === 'images');
 	}
 
 	process.exit();
