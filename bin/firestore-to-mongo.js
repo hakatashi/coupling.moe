@@ -38,10 +38,6 @@ const traverse = (object, mapper) => {
 
 	const collections = await db.getCollections();
 	for (const collection of collections) {
-		if (collection.id === 'images') {
-			continue;
-		}
-
 		console.log(`Importing ${collection.id}...`);
 		await mongo.createCollection(collection.id);
 		await mongo.collection(collection.id).deleteMany({});
