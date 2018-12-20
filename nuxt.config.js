@@ -1,9 +1,11 @@
 module.exports = {
 	build: {
 		postcss: {
-			precss: {},
-			'postcss-import-url': {
-				modernBrowser: true,
+			plugins: {
+				precss: {},
+				'postcss-import-url': {
+					modernBrowser: true,
+				},
 			},
 		},
 		extend(config) {
