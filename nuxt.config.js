@@ -65,5 +65,6 @@ module.exports = {
 			];
 		},
 		concurrency: 50,
+		fallback: '404.html',
 	},
 };
