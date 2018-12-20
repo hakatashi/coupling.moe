@@ -1,7 +1,5 @@
 const precss = require('precss');
 const importUrl = require('postcss-import-url');
-const firebase = require('./lib/firebase.js');
-const db = firebase.firestore();
 
 module.exports = {
 	build: {
@@ -19,6 +17,12 @@ module.exports = {
 				net: 'empty',
 				tls: 'empty',
 			};
+		},
+		html: {
+			minify: {
+				minifyCSS: false,
+				minifyJS: false,
+			},
 		},
 	},
 
@@ -42,11 +46,10 @@ module.exports = {
 	css: ['vuetify/dist/vuetify.css', 'vue-resize/dist/vue-resize.css'],
 
 	generate: {
-		minify: {
-			minifyCSS: false,
-			minifyJS: false,
-		},
 		routes: async () => {
+			// eslint-disable-next-line global-require
+			const firebase = require('./lib/firebase.js');
+			const db = firebase.firestore();
 			const characters = await db.collection('characters').get();
 			const couplings = await db.collection('couplings').get();
 			return [
