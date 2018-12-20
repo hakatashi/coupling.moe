@@ -112,7 +112,7 @@
 							nuxt
 						>
 							<v-list-tile-avatar>
-								<img :src="coupling.imageUrls[0] && coupling.imageUrls[0].replace(/^https:\/\/i\.pximg\.net\/c\/128x128\//, 'https://i-mail.pximg.net/c/360x360_70/')">
+								<img class="character-coupling-thumbnail" :src="coupling.thumbnail">
 							</v-list-tile-avatar>
 							<v-list-tile-content>
 								<v-list-tile-title>
@@ -138,6 +138,7 @@
 
 <script>
 import db from '~/lib/db.js';
+import get from 'lodash/get';
 import {themeColors} from '~/lib/constants.js';
 
 const charactersRef = db.collection('characters');
@@ -163,6 +164,8 @@ export default {
 		couplings() {
 			const couplings = this.character ? this.$store.getters['couplings/getByCharacter'](this.character.id) : [];
 			return couplings.map((coupling) => {
+				const thumbnail = get(coupling, ['images', 0, 'image', 'thumbnailLink'], 'https://placehold.it/80x80');
+
 				if (coupling.isReversible && coupling.character2.name === this.character.name) {
 					return {
 						...coupling,
@@ -170,6 +173,7 @@ export default {
 						originalCharacter2: coupling.character2,
 						character1: coupling.character2,
 						character2: coupling.character1,
+						thumbnail,
 					};
 				}
 
@@ -177,6 +181,7 @@ export default {
 					...coupling,
 					originalCharacter1: coupling.character1,
 					originalCharacter2: coupling.character2,
+					thumbnail,
 				};
 			});
 		},
@@ -274,5 +279,9 @@ export default {
 	border-width: 3px;
 	border-style: solid;
 	border-radius: 50%;
+}
+
+.character-coupling-thumbnail {
+	object-fit: cover;
 }
 </style>

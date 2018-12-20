@@ -127,6 +127,9 @@ export default {
 			this.resizeTitle();
 		},
 		resizeTitle() {
+			if (!this.$el || !this.$refs.title) {
+				return;
+			}
 			const targetWidth = this.$el.clientWidth * 0.95;
 			const targetScale = Math.min(5, targetWidth / this.$refs.title.clientWidth);
 			this.titleScale = targetScale;

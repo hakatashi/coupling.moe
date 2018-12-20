@@ -68,6 +68,7 @@ export default {
 	font-family: coupling-font;
 	src: url("/NotoSerifCJKjp-Black-subset.woff2") format("woff2"),
 		url("/NotoSerifCJKjp-Black-subset.woff") format("woff");
+	font-display: optional;
 }
 .button--green {
 	display: inline-block;
