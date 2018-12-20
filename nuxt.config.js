@@ -1,14 +1,11 @@
-const precss = require('precss');
-const importUrl = require('postcss-import-url');
-
 module.exports = {
 	build: {
-		postcss: [
-			precss(),
-			importUrl({
+		postcss: {
+			precss: {},
+			'postcss-import-url': {
 				modernBrowser: true,
-			}),
-		],
+			},
+		},
 		extend(config) {
 			config.node = {
 				fs: 'empty',
@@ -35,7 +32,9 @@ module.exports = {
 		gcm_sender_id: '103953800507',
 	},
 
-	modules: ['@nuxtjs/pwa'],
+	modules: [
+		'@nuxtjs/pwa',
+	],
 
 	env: {
 		VAPID_KEY: 'BNwKlUsy_JXMtIFPCH2PCcZ213I6QZJt27ZwiqhKzNf-f0XeYQDdfGE165x3M49fEaMAH-B9Z0oQhK4gCI_R68o',
