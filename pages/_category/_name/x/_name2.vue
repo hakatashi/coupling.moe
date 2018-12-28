@@ -14,6 +14,20 @@
 					ref="title"
 					:style="{transform: `scale(${titleScale})`}"
 				>
+					<div
+						class="stripe"
+						:style="{
+							backgroundImage: `
+								repeating-linear-gradient(
+									30deg,
+									${character1.color},
+									${character1.color} 2px,
+									${character2.color} 2px,
+									${character2.color} 4px
+								)
+							`,
+						}"
+					/>
 					{{coupling.names[0]}}
 					<resize-observer @notify="onResize"/>
 				</span>
@@ -86,8 +100,10 @@ export default {
 	computed: {
 		coupling() {
 			return (
-				this.$store.getters['couplings/getByCharacterNames']([this.$route.params.name, this.$route.params.name2])[0] || {
+				{
 					names: [`${this.$route.params.name}×${this.$route.params.name2}`],
+					images: [],
+					...this.$store.getters['couplings/getByCharacterNames']([this.$route.params.name, this.$route.params.name2])[0],
 				}
 			);
 		},
@@ -163,6 +179,16 @@ export default {
 		display: inline-block;
 		white-space: nowrap;
 		position: relative;
+	}
+
+	.stripe {
+		position: absolute;
+		bottom: 0.05em;
+		left: -3px;
+		right: -3px;
+		height: 0.15em;
+		z-index: -1;
+		opacity: 0.5;
 	}
 }
 .coupling-name {
