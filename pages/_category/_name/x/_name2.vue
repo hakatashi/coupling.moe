@@ -1,5 +1,11 @@
 <template>
-	<div>
+	<div class="coupling-wrap">
+		<div
+			class="coupling-background"
+			:style="{
+				backgroundImage: backgroundImage && `url(${backgroundImage.link})`,
+			}"
+		/>
 		<v-progress-linear
 			v-if="isLoading"
 			:style="{margin: 0}"
@@ -90,6 +96,7 @@ export default {
 			isChangeColorDialogShowing: false,
 			temporalColor: null,
 			titleScale: 1,
+			orientation: 'portrait',
 		};
 	},
 	async fetch({store, params}) {
@@ -127,22 +134,29 @@ export default {
 				color: '#222222',
 			};
 		},
+		backgroundImage() {
+			return this.coupling.images.filter(({image}) => {
+				if (!image) {
+					return false;
+				}
+				const dimension = this.orientation === 'landscape' ? image.width : image.height;
+				return dimension >= 600;
+			})[0];
+		},
 	},
 	mounted() {
 		this.$store.dispatch('couplings/bindByCharacterNames', [this.$route.params.name, this.$route.params.name2]).then(() => {
 			this.isLoading = false;
 		});
-		window.addEventListener('resize', this.resizeTitle);
-		this.resizeTitle();
+		window.addEventListener('resize', this.onResize);
+		this.onResize();
 	},
 	destroyed() {
-		window.removeEventListener('resize', this.resizeTitle);
+		window.removeEventListener('resize', this.onResize);
 	},
 	methods: {
 		onResize() {
-			this.resizeTitle();
-		},
-		resizeTitle() {
+			this.orientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
 			if (!this.$el || !this.$refs.title) {
 				return;
 			}
@@ -160,6 +174,23 @@ export default {
 </script>
 
 <style>
+.coupling-wrap {
+	height: 100%;
+	position: relative;
+	z-index: 0;
+}
+.coupling-background {
+	position: absolute;
+	top: -15px;
+	left: -5px;
+	right: -5px;
+	bottom: -15px;
+	filter: blur(6px);
+	background-size: cover;
+	background-position: center;
+	z-index: -1;
+	opacity: 0.3;
+}
 .coupling-title {
 	display: flex;
 	flex-direction: column;
