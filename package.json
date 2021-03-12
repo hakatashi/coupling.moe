@@ -25,16 +25,16 @@
     "precommit": "npm run lint"
   },
   "devDependencies": {
-    "@hakatashi/eslint-config": "^1.8.4",
+    "@hakatashi/eslint-config": "^1.15.0",
     "babel-eslint": "^10.0.1",
-    "cross-env": "^5.2.0",
-    "eslint": "^5.12.0",
-    "firebase": "^5.7.2",
-    "firebase-admin": "^6.4.0",
-    "mongodb": "^3.1.10",
-    "postcss-import-url": "^4.0.0",
-    "vue-resize": "^0.4.5",
-    "vuetify": "^1.4.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.21.0",
+    "firebase": "^8.2.10",
+    "firebase-admin": "^9.5.0",
+    "mongodb": "^3.6.4",
+    "postcss-import-url": "^7.0.0",
+    "vue-resize": "^1.0.0",
+    "vuetify": "^2.4.5",
     "vuexfire": "hakatashi/vuexfire#3.0.0-alpha.5.hakatashi.1"
   }
 }
