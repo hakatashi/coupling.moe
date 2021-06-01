@@ -18,7 +18,7 @@
 				</v-list-tile>
 			</v-list>
 		</v-navigation-drawer>
-		<v-toolbar
+		<v-app-bar
 			app
 			dark
 			dense
@@ -30,7 +30,7 @@
 					カップリングデータベース
 				</nuxt-link>
 			</v-toolbar-title>
-		</v-toolbar>
+		</v-app-bar>
 		<v-content>
 			<nuxt/>
 		</v-content>
