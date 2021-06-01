@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@hakatashi/eslint-config": "^1.15.0",
+    "@nuxtjs/vuetify": "^1.11.3",
     "babel-eslint": "^10.0.1",
     "cross-env": "^7.0.3",
     "eslint": "^7.21.0",
@@ -35,7 +36,6 @@
     "mongodb": "^3.6.4",
     "postcss-import-url": "^7.0.0",
     "vue-resize": "^1.0.0",
-    "vuetify": "^2.4.5",
     "vuexfire": "hakatashi/vuexfire#3.0.0-alpha.5.hakatashi.1"
   }
 }
