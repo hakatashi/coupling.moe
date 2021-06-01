@@ -60,11 +60,11 @@ module.exports = {
 			return [
 				'/',
 				'/imas346/',
-				...characters.docs.map((character) => `/imas346/${character.get('name')}`),
+				...characters.docs.map((character) => `/imas346/${encodeURIComponent(character.get('name'))}`),
 				...couplings.docs.map((coupling) => {
 					const character1 = characters.docs.find((character) => character.id === coupling.get('character1').id);
 					const character2 = characters.docs.find((character) => character.id === coupling.get('character2').id);
-					return `/imas346/${character1.get('name')}/x/${character2.get('name')}`;
+					return `/imas346/${encodeURIComponent(character1.get('name'))}/x/${encodeURIComponent(character2.get('name'))}`;
 				}),
 			];
 		},
