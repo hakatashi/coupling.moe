@@ -10,7 +10,7 @@
     "build": "babel index.babel.js --out-file index.js --presets=env --plugins=transform-runtime && babel pixpedia.babel.js --out-file pixpedia.js --presets=env --plugins=transform-runtime"
   },
   "engines": {
-    "node": "10"
+    "node": "14"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
