@@ -16,7 +16,7 @@
 			>
 				<v-btn
 					slot="activator"
-					flat
+					text
 					icon
 					color="white"
 					class="character-change-color"
@@ -64,7 +64,7 @@
 						<v-spacer/>
 						<v-btn
 							color="primary"
-							flat
+							text
 							@click="onClickChangeColor"
 						>
 							変更する
