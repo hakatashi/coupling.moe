@@ -36,7 +36,7 @@ const traverse = (object, mapper) => {
 	const mongoClient = await MongoClient.connect('mongodb://localhost:27017/');
 	const mongo = mongoClient.db('coupling-moe');
 
-	const collections = await db.getCollections();
+	const collections = await db.listCollections();
 	for (const collection of collections) {
 		console.log(`Importing ${collection.id}...`);
 		await mongo.createCollection(collection.id);
