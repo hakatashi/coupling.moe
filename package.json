@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@hakatashi/eslint-config": "^1.19.0",
-    "@nuxtjs/vuetify": "^1.11.3",
+    "@nuxtjs/vuetify": "^1.12.3",
     "babel-eslint": "^10.0.1",
     "cross-env": "^7.0.3",
     "eslint": "^8.40.0",
