@@ -30,7 +30,7 @@
     "@nuxtjs/vuetify": "^1.11.3",
     "babel-eslint": "^10.0.1",
     "cross-env": "^7.0.3",
-    "eslint": "^8.39.0",
+    "eslint": "^8.40.0",
     "firebase": "^8.10.1",
     "firebase-admin": "^11.8.0",
     "mongodb": "^5.4.0",
