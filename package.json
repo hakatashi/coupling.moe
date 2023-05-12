@@ -31,7 +31,7 @@
     "babel-eslint": "^10.0.1",
     "cross-env": "^7.0.3",
     "eslint": "^8.40.0",
-    "firebase": "^9.21.0",
+    "firebase": "^9.22.0",
     "firebase-admin": "^11.8.0",
     "mongodb": "^5.5.0",
     "postcss-import-url": "^7.2.0",
