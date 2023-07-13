@@ -14,7 +14,7 @@
   "dependencies": {
     "@nuxtjs/pwa": "latest",
     "nuxt": "latest",
-    "postcss": "^8.4.25",
+    "postcss": "^8.4.26",
     "precss": "^4.0.0"
   },
   "scripts": {
