@@ -33,7 +33,7 @@
     "eslint": "^8.51.0",
     "firebase": "^10.5.0",
     "firebase-admin": "^11.11.0",
-    "mongodb": "^6.1.0",
+    "mongodb": "^6.2.0",
     "postcss-import-url": "^7.2.0",
     "vue-resize": "^1.0.1",
     "vuexfire": "hakatashi/vuexfire#3.0.0-alpha.5.hakatashi.1"
