@@ -16,7 +16,7 @@
     "babel-runtime": "^6.26.0",
     "firebase-admin": "~11.11.1",
     "firebase-functions": "^4.6.0",
-    "googleapis": "^129.0.0",
+    "googleapis": "^130.0.0",
     "scrape-it": "^6.1.0"
   },
   "private": true,
