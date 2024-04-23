@@ -17,7 +17,7 @@
     "firebase-admin": "~12.1.0",
     "firebase-functions": "^4.9.0",
     "googleapis": "^134.0.0",
-    "scrape-it": "^6.1.0"
+    "scrape-it": "^6.1.2"
   },
   "private": true,
   "devDependencies": {
