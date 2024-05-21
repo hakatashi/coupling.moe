@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "firebase-admin": "~12.1.0",
+    "firebase-admin": "~12.1.1",
     "firebase-functions": "^5.0.1",
     "googleapis": "^137.1.0",
     "scrape-it": "^6.1.2"
