@@ -32,7 +32,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^9.19.0",
     "firebase": "^11.2.0",
-    "firebase-admin": "^13.0.2",
+    "firebase-admin": "^13.1.0",
     "mongodb": "^6.13.0",
     "postcss-import-url": "^7.2.0",
     "vue-resize": "^1.0.1",
